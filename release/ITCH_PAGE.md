@@ -1,4 +1,4 @@
-# House of Cinders
+# Gate to Hell
 
 **Short description:** Draft a trio. Chain nine elements. Defeat ten bosses—or take the Infinity Key into endless Hell.
 
@@ -33,6 +33,6 @@ Desktop keyboard and mouse required. Chromium and Firefox tested on Linux; Safar
 
 ## Credits and version
 
-Version **0.9.0**. Game code, original Blender artwork, element icons, synthesized music and sound effects are created in this project. LÖVE supplies the runtime and default font; the browser export uses love.js 11.4.1. Runtime licenses are included. Default packages include all eighteen animated heroes, ten animated bosses, distinct Hell costumes, three Throne phase appearances and dedicated combat artwork. Older flat portraits remain excluded. Optional DreamLayer source portraits are excluded pending replacement.
+Version **0.9.0**. Game code, original Blender artwork, element icons, synthesized music and sound effects are created in this project. Typography uses Cinzel and Adwaita Sans (SIL Open Font License). Selected hit, critical, slash and shockwave effects are author-provided DreamLayer artwork. LÖVE supplies the runtime; the browser export uses love.js 11.4.1. Font and runtime licenses are included. Default packages include all eighteen animated heroes, ten animated bosses, distinct Hell costumes, three Throne phase appearances and dedicated combat artwork. Older flat portraits remain excluded. Optional DreamLayer source portraits are excluded pending replacement.
 
 Creator display name: use your itch.io profile name. Suggested tags: singleplayer, roguelike, action, boss-battle, fantasy. Update screenshots, credits and the version after replacing artwork.

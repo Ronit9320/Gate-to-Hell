@@ -1,9 +1,9 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,"><title>House of Cinders</title>
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,"><title>Gate to Hell</title>
 <style>*{box-sizing:border-box}body{margin:0;background:#091114;color:#ecdec2;font:14px system-ui;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center}canvas{max-width:100vw;max-height:calc(100vh - 40px);object-fit:contain;outline:none}header{height:40px;display:flex;align-items:center;gap:24px}button{background:#203b3d;border:1px solid #b9955a;color:inherit;padding:5px 16px;cursor:pointer}#status{position:absolute;top:45%;background:#13272d;padding:20px}#warning{color:#ffb484}</style>
-<header><span>HOUSE OF CINDERS · v0.9.0</span><button id="full">Fullscreen</button><span id="warning"></span></header><div id="status">Loading the House…</div><canvas aria-label="House of Cinders game. Click to focus. F1 opens controls." id="canvas" tabindex="0" oncontextmenu="event.preventDefault()"></canvas>
+<header><span>GATE TO HELL · v0.9.0</span><button id="full">Fullscreen</button><span id="warning"></span></header><div id="status">Loading the Gate…</div><canvas aria-label="Gate to Hell game. Click to focus. F1 opens controls." id="canvas" tabindex="0" oncontextmenu="event.preventDefault()"></canvas>
 <script>
 const canvas=document.getElementById('canvas'),statusEl=document.getElementById('status');
-let storageOK=true,syncing=false;const saveRoot='/home/web_user/love/house-of-cinders';
+let storageOK=true,syncing=false;const saveRoot='/home/web_user/love/gate-to-hell';
 function warn(e){storageOK=false;document.getElementById('warning').textContent='Storage unavailable — progress lasts this session only.';console.warn(String(e));}
 function persist(){if(!storageOK||!Module.cindersFS||syncing)return;syncing=true;try{const F=Module.cindersFS;for(const name of ['run.sav','settings.sav','proof.txt']){const p=saveRoot+'/'+name;if(F.analyzePath(p).exists)localStorage.setItem('cinders:'+name,F.readFile(p,{encoding:'utf8'}));}}catch(e){warn(e);}finally{syncing=false;}}
 var Module={arguments:['./game.love'],INITIAL_MEMORY:268435456,canvas,print:console.log,printErr:console.error,

@@ -1,4 +1,4 @@
-House of Cinders — v0.9.0
+Gate to Hell — v0.9.0
 Game code, procedural fallbacks, element icons, cards, synthesized music and
 sound effects are created in this project's source. No external samples are used.
 UI frames, card-table backgrounds, nine element medallions, all 23 item icons,
@@ -17,7 +17,7 @@ Original reference portrait was DreamLayer-generated; its file is excluded.
 Other portrait PNGs remain excluded. Optional source portraits (18 heroes
 and Ash Bailiff) were generated/processed with DreamLayer on 2026-10-12; see
 HANDOFF.md. These are excluded pending the author's replacement artwork.
-The default font and runtime are supplied by LÖVE (see LOVE-LICENSE.txt).
+The fallback font and runtime are supplied by LÖVE (see LOVE-LICENSE.txt).
 The browser runtime is love.js 11.4.1, copyright Tanner Rogalsky, MIT license.
 The browser package includes LOVEJS-LICENSE.txt from its pinned npm distribution.
 LÖVE: https://love2d.org/
@@ -44,3 +44,10 @@ for these new assets. Runtime packages include rendered PNGs and metadata only.
 New optional release cover: original boss geometry and Blender text, rendered
 by scripts/blender/build_release_cover.py; editable source:
 art-src/blender/release-cover.blend; runtime-free media: release/cover-blender.png.
+
+Submission polish (12 October 2026): four author-provided DreamLayer FX
+cutouts from release/fx-dreamlayer are included in assets/effects/authored.
+They animate at runtime for hits, critical hits, melee slashes and shockwaves.
+Fonts: Cinzel by Natanael Gama and Adwaita Sans by its respective authors;
+both distributed under SIL OFL 1.1. Full notices in assets/fonts/*LICENSE.txt
+and assets/fonts/Cinzel-OFL.txt. Font files are bundled, with no network dependency.

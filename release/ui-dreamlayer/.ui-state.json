@@ -1,0 +1,28 @@
+{
+ "running": {},
+ "done": [
+  "card_frame",
+  "button",
+  "panel_frame",
+  "medallion_pyro",
+  "icon_potion",
+  "cardback"
+ ],
+ "assets": {
+  "card_frame": "fb7da873-6918-49d5-a51a-c239d0e57d67",
+  "button": "b586c9ae-a79e-4566-84f2-4584f4fd182b",
+  "panel_frame": "27ace9dd-aeac-4457-897d-de03edd83a13",
+  "medallion_pyro": "0f4c164a-3298-4697-85f3-601802449276",
+  "icon_potion": "2a69de18-1d4c-4fbf-a38d-becb9dd62f0b",
+  "cardback": "1523bf84-cf6d-45d3-a793-1d6568ff708b"
+ },
+ "running_nobg": {},
+ "done_nobg": [
+  "card_frame",
+  "button",
+  "panel_frame",
+  "medallion_pyro",
+  "icon_potion",
+  "cardback"
+ ]
+}

@@ -39,6 +39,7 @@ function A.new(run)
     feedback = {},
     swings = {},
     attackSequence = 0,
+    skillSequence = 0,
     impactSequence = 0,
     hurtSequence = 0,
     hazards = {},
@@ -173,6 +174,7 @@ function A:switch(i)
   end
   self:feedbackAt('switch_out', self.x, self.y)
   self.active = i
+  self.pendingSkill = nil
   self:feedbackAt('switch_in', self.x, self.y)
   self:visualHero().walking = false
   if nextH.id == 'volt' then
@@ -451,6 +453,19 @@ function A:fire(owner, dx, dy, damage, element, speed, angle)
     t = 2,
   }
 end
+-- A short, single-slot buffer makes deliberate presses survive hitstop or the
+-- end of an attack animation. It never queues a whole cooldown or a new hero.
+function A:requestSkill(tx, ty)
+  if self.result or self:hero().hp <= 0 then
+    return false
+  end
+  if self:attack(tx, ty, true) then
+    self.pendingSkill = nil
+    return true
+  end
+  self.pendingSkill = { x = tx, y = ty, owner = self.active, expires = self.time + 0.18 }
+  return false
+end
 function A:attack(tx, ty, skill)
   if self.result or self.dodge > 0 or (self.hitstop or 0) > 0 then
     return false
@@ -493,6 +508,7 @@ function A:attack(tx, ty, skill)
     return false
   end
   h.cd = data.cooldown
+  self.skillSequence = self.skillSequence + 1
   local visual = self:visualHero()
   visual.skillAt, visual.dx, visual.dy = self.time, dx, dy
   self:feedbackAt('cast', self.x, self.y, H.colors[data.element], dx, dy, nil, data.element, 'skill_' .. h.id)
@@ -555,11 +571,17 @@ function A:attack(tx, ty, skill)
 end
 function A:dodgeStart(dx, dy)
   local h = self:hero()
-  if h.dodgeCd > 0 or (self.dodgeLock or 0) > 0 then
-    return
+  if self.result or h.hp <= 0 or h.dodgeCd > 0 or (self.dodgeLock or 0) > 0 then
+    return false
+  end
+  local visual = self:visualHero()
+  if dx == 0 and dy == 0 then
+    dx, dy = visual.dx or 0, visual.dy or -1
+    if dx == 0 and dy == 0 then
+      dy = -1
+    end
   end
   self.dodgeX, self.dodgeY = U.norm(dx, dy)
-  local visual = self:visualHero()
   visual.dodgeAt = self.time
   if self.dodgeX ~= 0 or self.dodgeY ~= 0 then
     visual.dx, visual.dy = self.dodgeX, self.dodgeY
@@ -578,6 +600,7 @@ function A:dodgeStart(dx, dy)
   if h.id == 'gale' then
     h.haste = 2
   end
+  return true
 end
 function A:consume(i)
   local id = self.run.consumables[i]
@@ -664,6 +687,14 @@ function A:update(dt, mx, my)
         self:feedbackAt('shield_break', self.x, self.y)
       end
       h.shield = 0
+    end
+  end
+  local pending = self.pendingSkill
+  if pending then
+    if pending.owner ~= self.active or self.time > pending.expires then
+      self.pendingSkill = nil
+    elseif self:attack(pending.x, pending.y, true) then
+      self.pendingSkill = nil
     end
   end
   if b.stun > 0 then

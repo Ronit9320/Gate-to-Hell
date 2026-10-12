@@ -24,6 +24,9 @@ def archive(target, files, base):
 files = [ROOT / 'main.lua', ROOT / 'conf.lua']
 files += list((ROOT / 'src').rglob('*.lua'))
 files += list((ROOT / 'assets').glob('*.txt'))
+files += sorted((ROOT / 'assets/fonts').glob('*.ttf'))
+files += sorted((ROOT / 'assets/fonts').glob('*.txt'))
+files += sorted((ROOT / 'assets/effects/authored').glob('*.png'))
 # Runtime Blender art requested by the author; source and previews never ship.
 boss_dir = ROOT / 'assets/bosses/bailiff_iso'
 approved_boss_files = [boss_dir / ('bailiff_y%03d.png' % angle) for angle in range(0, 360, 45)] + [boss_dir / 'bailiff.json', boss_dir / 'portrait.png']
@@ -67,10 +70,10 @@ files += hero_files
 if args.include_art:
     files += list((ROOT / 'assets/heroes').glob('*.png'))
     files += list((ROOT / 'assets/bosses').glob('*.png'))
-archive(OUT / 'house-of-cinders.love', files, ROOT)
+archive(OUT / 'gate-to-hell.love', files, ROOT)
 subprocess.run([
-    str(ROOT / 'node_modules/.bin/love.js'), str(OUT / 'house-of-cinders.love'),
-    str(OUT / 'web'), '-c', '-t', 'House of Cinders', '-m', '268435456',
+    str(ROOT / 'node_modules/.bin/love.js'), str(OUT / 'gate-to-hell.love'),
+    str(OUT / 'web'), '-c', '-t', 'Gate to Hell', '-m', '268435456',
 ], check=True, cwd=ROOT)
 # Export the runtime filesystem for the synchronous, bounded save adapter.
 # Guard the patch so a toolchain update cannot silently break persistence.
@@ -80,16 +83,30 @@ assert source.count('FS.staticInit();') == 1, 'Unexpected love.js runtime: revie
 runtime.write_text(source.replace('FS.staticInit();', 'FS.staticInit();Module.cindersFS=FS;'))
 # love.js uses a random preload-cache UUID. Content-address it for reproducibility.
 loader = OUT / 'web/game.js'
-digest = hashlib.sha256((OUT / 'house-of-cinders.love').read_bytes()).hexdigest()
-loader.write_text(re.sub(r'"package_uuid":"[^"]+"', '"package_uuid":"' + digest + '"', loader.read_text()))
+digest = hashlib.sha256((OUT / 'gate-to-hell.love').read_bytes()).hexdigest()
+loader_source = loader.read_text()
+# A large IndexedDB cache write must not block the first playable frame. Some
+# browser/storage combinations leave that transaction pending indefinitely.
+cache_block = '''                    cacheRemotePackage(db, PACKAGE_PATH + PACKAGE_NAME, packageData, {uuid:PACKAGE_UUID}, processPackageData,
+                      function(error) {
+                        console.error(error);
+                        processPackageData(packageData);
+                      });'''
+assert loader_source.count(cache_block) == 1, 'Unexpected preload cache: review nonblocking startup'
+loader_source = loader_source.replace(cache_block, '''                    processPackageData(packageData);
+                    try {
+                      cacheRemotePackage(db, PACKAGE_PATH + PACKAGE_NAME, packageData, {uuid:PACKAGE_UUID}, function() {},
+                        function(error) { console.warn('Optional game cache unavailable', error); });
+                    } catch (error) { console.warn('Optional game cache unavailable', error); }''')
+loader.write_text(re.sub(r'"package_uuid":"[^"]+"', '"package_uuid":"' + digest + '"', loader_source))
 (OUT / 'web/index.html').write_bytes((ROOT / 'web/index.html').read_bytes())
 (OUT / 'web/LOVEJS-LICENSE.txt').write_bytes((ROOT / 'node_modules/love.js/LICENSE').read_bytes())
 (OUT / 'web/LOVE-LICENSE.txt').write_bytes((ROOT / 'assets/LOVE-LICENSE.txt').read_bytes())
 web_files = [OUT / 'web' / name for name in ['index.html','game.js','game.data','love.js','love.wasm','LOVE-LICENSE.txt','LOVEJS-LICENSE.txt']]
-archive(OUT / 'house-of-cinders-web.zip', web_files, OUT / 'web')
-with zipfile.ZipFile(OUT / 'house-of-cinders-web.zip') as z:
+archive(OUT / 'gate-to-hell-web.zip', web_files, OUT / 'web')
+with zipfile.ZipFile(OUT / 'gate-to-hell-web.zip') as z:
     assert 'index.html' in z.namelist()
-with zipfile.ZipFile(OUT / 'house-of-cinders.love') as z:
+with zipfile.ZipFile(OUT / 'gate-to-hell.love') as z:
     assert 'main.lua' in z.namelist()
     if not args.include_art:
         allowed = ('assets/bosses/bailiff_iso/', 'assets/bosses/isometric/', 'assets/ui/', 'assets/heroes/isometric/', 'assets/effects/', 'assets/scenery/')
@@ -98,6 +115,6 @@ with zipfile.ZipFile(OUT / 'house-of-cinders.love') as z:
         )
     assert 'devtools.lua' not in z.namelist(), 'Developer tools must never ship'
     assert not any(p.startswith(('tests/', '.git/', 'node_modules/')) for p in z.namelist())
-artifacts = [OUT / 'house-of-cinders.love', OUT / 'house-of-cinders-web.zip']
+artifacts = [OUT / 'gate-to-hell.love', OUT / 'gate-to-hell-web.zip']
 (OUT / 'SHA256SUMS').write_text(''.join(hashlib.sha256(p.read_bytes()).hexdigest() + '  ' + p.name + '\n' for p in artifacts))
-print('Built dist/house-of-cinders.love and dist/house-of-cinders-web.zip')
+print('Built dist/gate-to-hell.love and dist/gate-to-hell-web.zip')

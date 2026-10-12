@@ -1,5 +1,15 @@
 # Release verification — 0.9.0
 
+## Submission polish — 2026-10-12
+
+Selected four author-provided DreamLayer cutouts (hit, critical, slash and shockwave) and integrated bounded, cached runtime rendering with reduced-motion behavior and missing-file fallback. Existing hazard masks and elemental skill art remain in use. Added bundled Cinzel / Adwaita Sans typography with OFL notices, metric-centered buttons, live control hints, defeated-hero ability states and a simpler damage readout. Added a single-use 180 ms skill buffer (cleared on switch), facing-based neutral dodge and accurate dodge audio.
+
+Fixed a reproduced browser startup stall at 100% download: the optional IndexedDB preload cache write no longer blocks running the game. The browser test captures startup diagnostics on failure.
+
+Validation: **58 Lua scenarios pass**, formatting and exact source/archive/checksum verification pass, native five-second startup is clean (expected timeout 124). Chromium 153 tactics/layout checks pass with large text, pause and transactions; combat checks pass melee victory, reload, impacts and reduced motion. Firefox 150.0.2 draft/combat/persistence smoke passes. No runtime errors captured. These focused checks cover this polish pass; earlier full-release journey evidence below remains historical. Fresh human feel/pacing review and hosted submission are still pending.
+
+Packages: `dist/gate-to-hell.love`, `dist/gate-to-hell-web.zip`, with current checksums in `dist/SHA256SUMS`. New captures: `release/screenshots/polish-*.png`. No upload performed.
+
 ## Current Blender artwork delivery — 2026-10-12
 
 All 49 Lua scenarios, formatting, exact package contents/checksums, and native five-second startup pass. Full image verification covers 23 appearances / 7,360 boss frames and 91 effect sheets / 728 frames, checking dimensions, alpha borders and animation variation. Editable Blender source libraries reopen and validate.
@@ -36,8 +46,8 @@ Bailiff artwork update (v0.8.1): all35 headless groups pass; all320 rendered fra
 Historical v0.8.1 artifact hashes:
 
 ```text
-17771d40a040af432e1f7000ff0930d359dd329fd94aa0141c76a0ab8b3c4fea  house-of-cinders.love
-07a0ada4a42c71927f49ad130c7dfe7cff5caa8b43c21cbf80b337c816e424f5  house-of-cinders-web.zip
+17771d40a040af432e1f7000ff0930d359dd329fd94aa0141c76a0ab8b3c4fea  gate-to-hell.love
+07a0ada4a42c71927f49ad130c7dfe7cff5caa8b43c21cbf80b337c816e424f5  gate-to-hell-web.zip
 ```
 
 ## Tactical difficulty and Run Info revision

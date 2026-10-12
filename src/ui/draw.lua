@@ -48,13 +48,16 @@ function UI.item(id, cx, cy, size)
   UI.inspect(cx - size / 2, cy - size / 2, size, size, item.name, item.description)
 end
 function UI.font(n)
+  local face = n >= 22 and 'Cinzel' or 'AdwaitaSans'
   if UI.largeText and n < 20 then
     n = math.min(20, n + 2)
   end
-  if not UI.fonts[n] then
-    UI.fonts[n] = G.newFont(n)
+  local key = face .. ':' .. n
+  if not UI.fonts[key] then
+    local path = 'assets/fonts/' .. face .. '.ttf'
+    UI.fonts[key] = love.filesystem and love.filesystem.getInfo(path) and G.newFont(path, n) or G.newFont(n)
   end
-  G.setFont(UI.fonts[n])
+  G.setFont(UI.fonts[key])
 end
 function UI.text(s, x, y, n, color, w, align)
   UI.font(n or 16)
@@ -120,10 +123,11 @@ function UI.button(label, x, y, w, h, fn, disabled, icon)
   if icon then
     T.icon(icon, x + 21, y + h / 2, math.min(24, h - 10), disabled and { 0.5, 0.5, 0.5, 0.7 } or nil)
   end
+  UI.font(16)
   UI.text(
     label,
     x + inset,
-    y + (h - 18) / 2,
+    y + (h - G.getFont():getHeight()) / 2,
     16,
     disabled and { 0.4, 0.47, 0.45 } or { 0.98, 0.87, 0.64 },
     w - inset - 8,
@@ -729,16 +733,7 @@ function UI.arena(a)
   if a.lastHit then
     local h = a.lastHit
     UI.text(
-      h.name
-        .. ' '
-        .. h.kind
-        .. ': '
-        .. math.floor(h.base)
-        .. ' x '
-        .. string.format('%.2f', h.mult)
-        .. ' = '
-        .. h.actual
-        .. ' HP',
+      h.name .. ' / ' .. h.kind:upper() .. ' / ' .. h.actual .. ' DAMAGE',
       390,
       172,
       12,
@@ -781,11 +776,25 @@ function UI.arena(a)
       if h.hp > 0 then
         UI.stat('shield', math.floor(h.shield), x + 183, 635, 13, nil, 87)
       end
-      UI.stat('skill', h.cd <= 0 and 'READY' or string.format('%.1fs', h.cd), x + 10, 659, 13, nil, 126)
+      UI.stat(
+        'skill',
+        h.hp <= 0 and '—'
+          or (
+            (i == a.active and ((UI.skillKey or 'E') .. ' · ') or '')
+            .. (h.cd <= 0 and 'READY' or string.format('%.1fs', h.cd))
+          ),
+        x + 10,
+        659,
+        13,
+        nil,
+        126
+      )
       local dodgeCd = math.max(h.dodgeCd, a.dodgeLock or 0)
       UI.stat(
         'dodge',
-        dodgeCd <= 0 and 'READY' or string.format('%.1fs', dodgeCd),
+        h.hp <= 0 and '—'
+          or dodgeCd <= 0 and (i == a.active and (UI.dodgeKey or 'SPACE') or 'READY')
+          or string.format('%.1fs', dodgeCd),
         x + 144,
         659,
         13,
@@ -812,10 +821,10 @@ function UI.arena(a)
         130,
         31,
         'Dodge',
-        'Dodge through danger with brief invulnerability. Cancels an unfinished melee swing. From floor 3, dodge recovery is shared across the team; switching cannot reset it.'
+        'Dodge through danger with brief invulnerability. With no movement held, dodge follows your facing. Cancels an unfinished melee swing. From floor 3, dodge recovery is shared across the team.'
       )
     else
-      UI.text('Empty recruitment slot', x + 13, 630, 16, { 0.4, 0.55, 0.52 }, 256)
+      UI.text('Recruit an ally in the shop', x + 13, 630, 16, { 0.54, 0.66, 0.63 }, 256)
     end
   end
   local h = a:hero()

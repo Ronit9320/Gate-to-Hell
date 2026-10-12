@@ -1,4 +1,43 @@
 return function(test)
+  test('selected cutout effects cache, fade, freeze motion and fall back safely', function()
+    local old = love
+    local uploads, calls, colors = 0, {}, {}
+    love = {
+      filesystem = {
+        getInfo = function(path)
+          return not path:find('critical')
+        end,
+      },
+      graphics = {
+        newImage = function()
+          uploads = uploads + 1
+          return {
+            setFilter = function() end,
+            getDimensions = function()
+              return 2048, 2048
+            end,
+          }
+        end,
+        setColor = function(...)
+          colors[#colors + 1] = { ... }
+        end,
+        draw = function(...)
+          calls[#calls + 1] = { ... }
+        end,
+      },
+    }
+    local F = dofile('src/render/authored_fx.lua')
+    assert(F.draw('hit', 10, 20, 85, 0.1, false, 0))
+    assert(F.draw('hit', 10, 20, 85, 0.9, false, 0))
+    assert(uploads == 1 and colors[1][4] > colors[2][4])
+    F.draw('slash', 10, 20, 100, 0.1, true, 0.5)
+    F.draw('slash', 10, 20, 100, 0.9, true, 0.5)
+    assert(calls[3][4] == calls[4][4] and calls[3][5] == calls[4][5])
+    assert(not F.draw('critical', 0, 0, 100, 0, false, 0))
+    assert(not F.draw('hazard_flame', 0, 0, 100, 0, false, 0))
+    assert(uploads == 2, 'missing and unselected art must use the existing renderer')
+    love = old
+  end)
   test('all boss appearances, stagger/recovery and shared cache stay bounded', function()
     local B = require('src.data.boss_sprites')
     local A = require('src.render.atlas')

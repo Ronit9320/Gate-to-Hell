@@ -1,4 +1,4 @@
-"""House of Cinders: editable Blender UI/scenery and looping sprite exports.
+"""Gate to Hell: editable Blender UI/scenery and looping sprite exports.
 
 Run: blender -b -t 4 -P scripts/blender/build_house_ui.py
 Optional after --: names of assets to rebuild (e.g. arena_floor coin).

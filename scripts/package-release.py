@@ -17,8 +17,8 @@ for name in ['browser', 'firefox', 'release', 'management']:
     assert (root / '.test-results' / (name + '.json')).is_file(), 'Missing verification: ' + name
 version = json.loads((root / 'package.json').read_text())['version']
 files = list((root / 'release').rglob('*'))
-files += [root / 'dist' / name for name in ['house-of-cinders.love', 'house-of-cinders-web.zip', 'SHA256SUMS']]
-target = root / 'dist' / ('house-of-cinders-' + version + '-release-kit.zip')
+files += [root / 'dist' / name for name in ['gate-to-hell.love', 'gate-to-hell-web.zip', 'SHA256SUMS']]
+target = root / 'dist' / ('gate-to-hell-' + version + '-release-kit.zip')
 with zipfile.ZipFile(target, 'w', zipfile.ZIP_DEFLATED) as z:
     for p in sorted(files):
         if p.is_file():

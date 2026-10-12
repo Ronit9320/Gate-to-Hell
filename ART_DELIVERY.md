@@ -47,7 +47,7 @@ python3 scripts/verify-release.py
 node scripts/browser-test.cjs --missing-art-only
 ```
 
-`dist/house-of-cinders-blender-art.zip` contains this new art library and its
+`dist/gate-to-hell-blender-art.zip` contains this new art library and its
 editable sources. Source models, preview pages, generators and test files are
 excluded from runtime packages. The full runtime download is approximately 126 MB;
 the web loader reserves 256 MiB of WebAssembly memory for the expanded library. See the per-folder READMEs for exact frame order,

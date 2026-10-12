@@ -3,6 +3,7 @@ local C = { images = {}, quads = {}, clock = 0 }
 local I = require('src.render.iso')
 local H = require('src.data.heroes')
 local meta = require('src.data.combat_art')
+local Authored = require('src.render.authored_fx')
 function C.frame(progress, reducedMotion)
   return reducedMotion and 3 or math.min(7, math.max(0, math.floor(progress * 8)))
 end
@@ -75,6 +76,21 @@ function C.feedback(f, reducedMotion)
     or f.kind == 'defeat' and 230
     or 85
   local angle = (f.kind == 'slash' or f.kind == 'muzzle' or f.kind == 'dodge') and C.angle(f.dx, f.dy) or 0
+  local selected = f.kind == 'shock' and 'shock' or id
+  if
+    require('src.data.presentation').combatArt
+    and Authored.draw(
+      selected,
+      x,
+      y - (f.kind == 'shock' and 0 or 25),
+      selected == 'critical' and 110 or size,
+      p,
+      reducedMotion,
+      angle
+    )
+  then
+    return true
+  end
   if f.kind == 'shock' then
     C.draw('dust', x, y, math.min(200, f.radius * 2), p, reducedMotion, 0.4 * (1 - p))
   end

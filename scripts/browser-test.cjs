@@ -42,13 +42,13 @@ const errors=[];const results=[];
  });
  await p.addInitScript(()=>{window.audioProof={starts:0,contexts:[]};const AC=window.AudioContext;window.AudioContext=new Proxy(AC,{construct(T,args){const ctx=new T(...args);window.audioProof.contexts.push(ctx);return ctx;}});const start=AudioBufferSourceNode.prototype.start;AudioBufferSourceNode.prototype.start=function(...args){window.audioProof.starts++;return start.apply(this,args);};});
  p.on('console',m=>{const text=m.text();if(process.env.CINDERS_VERBOSE)console.log(m.type(),text);if(m.type()==='error'||/^Error:|stack traceback|RangeError/.test(text)){errors.push(text);console.log('ERROR',text);}});p.on('pageerror',e=>errors.push(e.message));
- const boot=async()=>{await p.waitForFunction(()=>window.Module?.calledRun);await p.waitForTimeout(1200);};
- const read=async()=>p.evaluate(()=>{try{return JSON.parse(Module.cindersFS.readFile('/home/web_user/love/house-of-cinders/run.sav',{encoding:'utf8'}));}catch{return null;}});
+ const boot=async()=>{try{await p.waitForFunction(()=>window.Module?.calledRun,{},{timeout:60000});}catch(e){console.log('BOOT',await p.evaluate(()=>({status:document.getElementById('status')?.textContent,abort:Module.ABORT,requests:performance.getEntriesByType('resource').map(r=>({name:r.name,bytes:r.transferSize,duration:r.duration}))})));await p.screenshot({path:'.test-results/boot-failure.png'});throw e;}await p.waitForTimeout(1200);};
+ const read=async()=>p.evaluate(()=>{try{return JSON.parse(Module.cindersFS.readFile('/home/web_user/love/gate-to-hell/run.sav',{encoding:'utf8'}));}catch{return null;}});
  const click=async(x,y)=>{const box=await p.locator('#canvas').boundingBox();await p.mouse.click(box.x+x*box.width/1280,box.y+y*box.height/720);await p.waitForTimeout(220);};
  const move=async(x,y)=>{const box=await p.locator('#canvas').boundingBox();await p.mouse.move(box.x+x*box.width/1280,box.y+y*box.height/720);};
  const shot=async(name)=>p.screenshot({path:`.test-results/${name}.png`});
  const approach=async()=>{await p.keyboard.down('d');await p.waitForTimeout(830);await p.keyboard.up('d');await p.keyboard.down('w');await p.waitForTimeout(830);await p.keyboard.up('w');};
- async function fixture(name){const raw=fs.readFileSync(`.test-results/fixture-${name}.json`,'utf8');await p.evaluate(raw=>{Module.cindersFS.writeFile('/home/web_user/love/house-of-cinders/run.sav',raw);},raw);await p.reload();await boot();await click(300,581);}
+ async function fixture(name){const raw=fs.readFileSync(`.test-results/fixture-${name}.json`,'utf8');await p.evaluate(raw=>{Module.cindersFS.writeFile('/home/web_user/love/gate-to-hell/run.sav',raw);},raw);await p.reload();await boot();await click(300,581);}
  await p.goto('http://127.0.0.1:8123');await boot();console.log('BROWSER',await b.version());await shot('title');
  if(process.argv.includes('--listing-only')){await click(200,525);await shot('listing-draft');await fixture('management');await shot('listing-shop');await fixture('victory');await shot('listing-victory');assert.deepEqual(errors,[]);console.log('Listing media captured');return;}
  if(process.argv.includes('--missing-art-only')){await require('./missing-art-check.cjs')({p,read,fixture,click,move,shot,results});assert.deepEqual(errors,[]);console.log('PASS',results.join('\nPASS '));return;}
@@ -146,7 +146,7 @@ const errors=[];const results=[];
  }
  // Full keyboard menu route, settings and rebinding in the actual packaged runtime.
  await p.setViewportSize({width:1280,height:800});
- await p.evaluate(()=>{for(const name of ['run.sav','settings.sav']){const path='/home/web_user/love/house-of-cinders/'+name;if(Module.cindersFS.analyzePath(path).exists)Module.cindersFS.unlink(path);localStorage.removeItem('cinders:'+name);}});
+ await p.evaluate(()=>{for(const name of ['run.sav','settings.sav']){const path='/home/web_user/love/gate-to-hell/'+name;if(Module.cindersFS.analyzePath(path).exists)Module.cindersFS.unlink(path);localStorage.removeItem('cinders:'+name);}});
  await p.reload();await boot();assert.equal(await read(),null);await p.locator('#canvas').focus();
  await p.keyboard.press('Tab');await p.keyboard.press('Enter');await p.waitForTimeout(350);assert.equal((await read()).stage,'draft');
  await p.keyboard.press('Tab');await p.waitForTimeout(180);await shot('keyboard-draft-focus');assert.equal(await p.evaluate(()=>document.activeElement.tagName),'CANVAS');await p.keyboard.press('Enter');await p.waitForTimeout(500);await shot('keyboard-after-choice');assert.equal((await read()).stage,'preview');

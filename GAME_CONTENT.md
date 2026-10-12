@@ -1,4 +1,4 @@
-# Game content catalog — House of Cinders
+# Game content catalog — Gate to Hell
 
 Status: Implementation through Phase 6. All 18 heroes, nine elements, the full reaction matrix, 23 items, ten normal bosses and ten Hell variants are functional. Distinct later bosses use geometric placeholder art. Numerical tuning, human balance acceptance, and final audiovisual finish remain open. This file owns content identities; runtime data files below own exact values. `HANDOFF.md` records verification and remaining gates.
 

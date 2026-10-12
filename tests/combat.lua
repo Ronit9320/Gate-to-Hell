@@ -8,6 +8,38 @@ return function(test, run)
       a:update(0.025, 0, 0)
     end
   end
+  test('neutral dodge follows facing, respects cooldown and stops after results', function()
+    local a = A.new(run('jack'))
+    local visual = a:visualHero()
+    visual.dx, visual.dy = 1, 0
+    assert(a:dodgeStart(0, 0))
+    assert(a.dodgeX == 1 and a.dodgeY == 0)
+    local x = a.x
+    advance(a, 0.1)
+    assert(a.x > x and not a:dodgeStart(-1, 0))
+    a:hero().dodgeCd = 0
+    a.result = 'victory'
+    assert(not a:dodgeStart(0, 1))
+  end)
+  test('skill buffer survives short recovery, expires and clears on switch', function()
+    local a = A.new(run('penny'))
+    a:hero().recovery = 0.1
+    assert(not a:requestSkill(0, -100))
+    advance(a, 0.15)
+    assert(a.skillSequence == 1 and not a.pendingSkill)
+    advance(a, 0.1)
+    assert(a.skillSequence == 1, 'buffer must fire only once')
+    a:hero().cd = 0.5
+    a:requestSkill(0, -100)
+    advance(a, 0.6)
+    assert(a.skillSequence == 1 and not a.pendingSkill, 'stale press must not auto-cast')
+    a:hero().recovery = 0.1
+    a:requestSkill(0, -100)
+    a.run.team[2] = H.instance('jack')
+    assert(a:switch(2) and not a.pendingSkill)
+    advance(a, 0.2)
+    assert(a.skillSequence == 1, 'switch must not transfer queued skill')
+  end)
   test('melee basics require range and direction; dodge cancels windup', function()
     local count = 0
     for _, data in ipairs(H.list) do

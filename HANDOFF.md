@@ -2,6 +2,16 @@
 
 Last updated: 2026-10-12
 
+## Submission polish — 2026-10-12
+
+Selected four author-provided DreamLayer cutouts (hit, critical, slash and shockwave) and integrated bounded, cached runtime rendering with reduced-motion behavior and missing-file fallback. Existing hazard masks and elemental skill art remain in use. Added bundled Cinzel / Adwaita Sans typography with OFL notices, metric-centered buttons, live control hints, defeated-hero ability states and a simpler damage readout. Added a single-use 180 ms skill buffer (cleared on switch), facing-based neutral dodge and accurate dodge audio.
+
+Fixed a reproduced browser startup stall at 100% download: the optional IndexedDB preload cache write no longer blocks running the game. The browser test captures startup diagnostics on failure.
+
+Validation: **58 Lua scenarios pass**, formatting and exact source/archive/checksum verification pass, native five-second startup is clean (expected timeout 124). Chromium 153 tactics/layout checks pass with large text, pause and transactions; combat checks pass melee victory, reload, impacts and reduced motion. Firefox 150.0.2 draft/combat/persistence smoke passes. No runtime errors captured. These focused checks cover this polish pass; earlier full-release journey evidence below remains historical. Fresh human feel/pacing review and hosted submission are still pending.
+
+Packages: `dist/gate-to-hell.love`, `dist/gate-to-hell-web.zip`, with current checksums in `dist/SHA256SUMS`. New captures: `release/screenshots/polish-*.png`. No upload performed.
+
 ## Current state
 
 **Version 0.9.0 implements the game through Phase 8 and includes all 18 reference-inspired Blender heroes, UI, animated scenery and the Ash Bailiff sprites.** The complete gameplay catalog, settings, icons, synthesized music/SFX and credits are present. Default packages include the hero and Bailiff atlases and the UI/environment library; original flat portrait PNGs are preserved and excluded. Other bosses retain geometric placeholders. Native/browser files are in `dist/`; upload instructions and listing materials are in `release/`. Art viewers: `assets/ui/preview.html` and `assets/heroes/isometric/preview.html`. Current captures are in `art-src/previews/` and `.test-results/`.
@@ -180,7 +190,7 @@ Content target: 18 named heroes, 10 distinct normal bosses and 10 Hell variants,
 - Build: `npm run build` — native and web packages produced, root entries and excluded test files asserted. Two consecutive builds had identical SHA-256 sums.
 - Serve: `npm run serve` serves `dist/web` at http://localhost:8000. The browser test harness independently serves the same files on loopback port 8123.
 - Browser: `luajit tests/fixtures.lua`, `node scripts/browser-test.cjs`, `node scripts/browser-test.cjs --firefox`. Chromium 153.0.8010.12: 19 UI/runtime scenario groups, including all 20 encounter renders and an actual Empty Throne victory/Infinity Key/Hell flow; Firefox 150.0.2: draft/combat/input/persistence smoke. Console error lists empty.
-- Artifacts: `dist/house-of-cinders.love`, `dist/house-of-cinders-web.zip`, `dist/web/`, `dist/SHA256SUMS`.
+- Artifacts: `dist/gate-to-hell.love`, `dist/gate-to-hell-web.zip`, `dist/web/`, `dist/SHA256SUMS`.
 - Reports/screenshots: `.test-results/browser.json`, `.test-results/firefox.json`, `.test-results/*.png` (generated, ignored, not packaged).
 - Release journey: `node scripts/browser-test.cjs --release-only` — ten floors → Infinity Key → Hell → natural defeat → restart, all through real UI and earned purchases.
 - Keyboard management: `node scripts/browser-test.cjs --management-only` — replacement/confirmations/equip/unequip/sales/inventory/reroll passed.
@@ -190,7 +200,7 @@ Content target: 18 named heroes, 10 distinct normal bosses and 10 Hell variants,
 ## Open information and risks
 
 - Need jam URL, deadline/timezone, and submission rules before committing a schedule or submitting.
-- Final title is undecided; **House of Cinders** is a working title only.
+- Final title: **Gate to Hell**.
 - User wants publication files with most assets left for replacement. Default geometric presentation and original synthesized audio are implemented; jam asset/AI restrictions are unknown.
 - Browser runtime compatibility, audio startup, storage, resizing, fullscreen and local embedding have automated coverage. Audible quality and hosted behavior remain unverified. See final release notes for bounded headless performance observations.
 - All 18 offered placeholder kits now function and pass solo floor-one simulation. Human balance testing remains essential. Eighteen heroes and twenty boss configurations are substantial jam content. Build reusable data/pattern systems, but do not silently drop promised content; flag schedule conflicts when a deadline becomes known.
@@ -230,7 +240,7 @@ Content target: 18 named heroes, 10 distinct normal bosses and 10 Hell variants,
 - Files changed: added `src/render/sprites.lua`; rewrote card/arena drawing in `src/ui/draw.lua`; `main.lua` small-card HP text width; new `scripts/dreamlayer-assets.py`, `scripts/dreamlayer-nobg.py`, `scripts/process-assets.sh`; shipped sprites under `assets/heroes/` + `assets/bosses/`; large sources in `art-src/` (git-ignored); HANDOFF/README status.
 - Commands and automated results: `npm test` all 18 scenario groups pass; `npm run build` packages 19 sprites with no `art-src/` leak; `node scripts/browser-test.cjs` (Chromium 153) — all 16 UI scenarios pass with sprites loaded; LÖVE 11.5 smoke launch clean; screenshot harness in `/tmp` confirmed sprites render (29,670 vs 1,707 card pixels with/without assets).
 - Manual/browser checks: sprites render in native and web builds; hero pink/purple palettes (nullable, oracle, volt) retain interior colour after cutout.
-- Artifacts: `dist/house-of-cinders.love`, `dist/house-of-cinders-web.zip`, `assets/heroes/*.png` (18), `assets/bosses/bailiff.png`, `art-src/previews/{contact-sheet,art-title-cards,art-arena}.png`.
+- Artifacts: `dist/gate-to-hell.love`, `dist/gate-to-hell-web.zip`, `assets/heroes/*.png` (18), `assets/bosses/bailiff.png`, `art-src/previews/{contact-sheet,art-title-cards,art-arena}.png`.
 - Decisions / notes: `background_remove` chosen over local chroma-keying (gradient magenta backgrounds leaked into characters); sources kept out of the shipped package; the Ash Bailiff sprite is used on every floor because later distinct bosses are still Phase 6.
 - Exact next action: visually inspect `art-src/previews/`; if the art direction is approved, extend to item icons (weapons/Curios/consumables) and the other nine bosses when Phase 6 lands.
 
@@ -267,7 +277,7 @@ Content target: 18 named heroes, 10 distinct normal bosses and 10 Hell variants,
 - Delivered: LÖVE skeleton, reproducible source archive, pinned npm exporter, browser shell, generated tone, and filesystem-to-localStorage persistence adapter.
 - Versions: native LÖVE 11.5; npm love.js 11.4.1 embeds LÖVE 11.4, so conf.lua targets 11.4 APIs. Compatibility mode, 64 MiB initial memory. Upstream master advertises 11.5 but the published npm runtime is older; this distinction is intentional.
 - Commands: `npm install --cache /tmp/cinders-npm`, `npm run build`, `node scripts/browser-test.cjs`. Browser/server execution needs sandbox approval here.
-- Artifacts: dist/house-of-cinders.love, dist/house-of-cinders-web.zip, dist/web/index.html.
+- Artifacts: dist/gate-to-hell.love, dist/gate-to-hell-web.zip, dist/web/index.html.
 - Chromium 153 loads and draws the Lua runtime. Further persistence/input checks recorded below; audible quality and hosted iframe verification require human review. Phase remains in progress until all acceptance checks pass; proceeding with the authorized implementation while retaining those gates.
 
 ### 2026-10-11 — Phase 1: combat foundation checkpoint
@@ -338,7 +348,7 @@ Content target: 18 named heroes, 10 distinct normal bosses and 10 Hell variants,
 - Final Chromium 153.0.8010.12 regression: all 19 groups pass, zero captured errors. Includes original demo/economy/save/audio-start/resize/fullscreen/iframe/storage checks, keyboard menus/settings/rebinding, all twenty boss renders, and a real browser Empty Throne clear with three Common heroes followed by Infinity Key award and Enter Hell. No fight cheat was used in that browser clear.
 - Firefox 150.0.2: draft/combat/input/reload smoke passed with zero captured errors on the final package.
 - Reports: `.test-results/browser.json`, `.test-results/firefox.json`; images include `boss-1.png` through `boss-20.png`, `settings-large.png`, `help-large.png`, `real-throne-victory.png`. Agent screenshot review is separate from human playtesting.
-- Final artifacts: `dist/house-of-cinders.love`, `dist/house-of-cinders-web.zip`, `dist/web`, `dist/SHA256SUMS`. SHA-256: native `1ea9c9b5d60b332e52b0fe060a1c8bf1aa7499478c60383327f8d0e89b6c6ddc`; web ZIP `689b070ee2cf2f913f30491cff307614938aa862ffc8b8908a0b75763ded31d6`.
+- Final artifacts: `dist/gate-to-hell.love`, `dist/gate-to-hell-web.zip`, `dist/web`, `dist/SHA256SUMS`. SHA-256: native `1ea9c9b5d60b332e52b0fe060a1c8bf1aa7499478c60383327f8d0e89b6c6ddc`; web ZIP `689b070ee2cf2f913f30491cff307614938aa862ffc8b8908a0b75763ded31d6`.
 - Remaining acceptance: manually clear all twenty normal/Hell encounters with cheats off, review early/late Hell pacing and fresh-player readability, and conduct audible/hosted checks. No publication or Phase 7–8 work was performed.
 
 ### 2026-10-12 — Requested phase-completion audit
@@ -369,7 +379,7 @@ Content target: 18 named heroes, 10 distinct normal bosses and 10 Hell variants,
 - Delivered: version0.8.0, release web shell with loading/failure/fullscreen feedback, default art-free deterministic packaging, exact source/package/license/exclusion verification, upload instructions, listing copy, controls/credits, 630×500 SVG/PNG cover, actual gameplay screenshots and art replacement guide.
 - Fresh-context browser release journey: ordinary draft, all ten natural combat victories, earned-gold recruitment/equipment purchases, Infinity Key, Enter Hell, natural defeat and restart. No injected fixture/run, god mode, damage override or extra currency. Team: Madame Match / Flint Rook / Gale Knave. Report `.test-results/release.json`. Music/effects controls persist; credits checked.
 - Final builds reproduce byte-for-byte; `python3 scripts/verify-release.py` passes. Default `.love` contains no PNGs; optional `--include-art` includes top-level portraits only after the author enables them. Preserved directional Bailiff files are not shipped or used.
-- Artifacts: `dist/house-of-cinders.love`, `dist/house-of-cinders-web.zip`, `dist/SHA256SUMS`, `dist/house-of-cinders-0.8.0-release-kit.zip`. Listing/media/guides in `release/`; native download requires installed LÖVE11.4/11.5.
+- Artifacts: `dist/gate-to-hell.love`, `dist/gate-to-hell-web.zip`, `dist/SHA256SUMS`, `dist/gate-to-hell-0.8.0-release-kit.zip`. Listing/media/guides in `release/`; native download requires installed LÖVE11.4/11.5.
 - Final SHA-256: native `5a655f609e600ea78d571b506de785eb82f3891b2ff99e17b69e5ebbf12036e9`; web `5ef682026affb3c4b924bd8c63b05092d3b1aa256d7b1c233dd583ad1a60e095`.
 - User scope: ready for their upload, most assets to be replaced by them. No jam URL/deadline/rules or itch.io project supplied. Hosted test and jam compliance cannot be claimed. Official HTML5 upload guidance checked; source link is in release/UPLOAD_CHECKLIST.md.
 - Exact next action: author replaces art following release/ART_REPLACEMENT.md, repeats final checks/media capture, completes release/PLAYTEST_CHECKLIST.md and tests the hosted draft before choosing publication.
@@ -389,7 +399,7 @@ Content target: 18 named heroes, 10 distinct normal bosses and 10 Hell variants,
 - Final Firefox150.0.2 draft/combat/reload smoke passed with the new atlas build and no captured errors. Agent inspected in-game idle/death, animation contact images and the live Blender source; human art acceptance remains separate.
 - `npm run build` and `python3 scripts/verify-release.py` pass. Default package policy is now a precise whitelist of8 Bailiff sheets plusJSON, runtime code/licenses; other portraits, the old directional files, .blend/raw frames and test/preview tools remain excluded.
 - Asset/editing kit: `dist/ash-bailiff-isometric-assets.zip` includes all8 sheets, JSON/Lua metadata, animation viewer/previews, refined .blend, original source snapshot/reference and reproducible modeling/rendering scripts. `assets/bosses/bailiff_iso/preview.html` previews the sheets; `turnaround.png` and `idle-preview.webp` show directions/animation.
-- Updated game artifacts: `dist/house-of-cinders.love` and `dist/house-of-cinders-web.zip` (v0.8.1). Native SHA256 `17771d40a040af432e1f7000ff0930d359dd329fd94aa0141c76a0ab8b3c4fea`; web `07a0ada4a42c71927f49ad130c7dfe7cff5caa8b43c21cbf80b337c816e424f5`.
+- Updated game artifacts: `dist/gate-to-hell.love` and `dist/gate-to-hell-web.zip` (v0.8.1). Native SHA256 `17771d40a040af432e1f7000ff0930d359dd329fd94aa0141c76a0ab8b3c4fea`; web `07a0ada4a42c71927f49ad130c7dfe7cff5caa8b43c21cbf80b337c816e424f5`.
 - Earlier v0.8.0 full release-journey/19-group browser evidence is historical; focused asset tests and Firefox above are current. No new human playtest or publication claim.
 - Next: author reviews the boss style; apply the same Blender pipeline to other characters when requested.
 
@@ -408,7 +418,7 @@ Content target: 18 named heroes, 10 distinct normal bosses and 10 Hell variants,
 - Integrated boss selection, stagger/recovery/death timing, phase costumes, portraits, all skill/reaction/status/consumable art, masked hazard artwork and props. Existing combat rules/RNG are preserved; procedural fallbacks and bounded texture caches remain.
 - Original editable geometry/animation libraries in `art-src/blender/`; generators and source verifiers in `scripts/blender/`. Offline gallery: `assets/art-preview.html`. Delivery/rebuild instructions: `ART_DELIVERY.md`. New cover: `release/cover-blender.png`.
 - Final full image checks pass all 23 appearances, 91 effect sheets, alpha borders, frame variation and scenery. Blender source libraries reopen and validate. All 49 Lua scenario groups, formatting and exact source/archive/checksum checks pass. Web loader/build memory increased from 64 to 256 MiB for the expanded asset library.
-- Current downloads: `dist/house-of-cinders.love`, `dist/house-of-cinders-web.zip`, and editable asset kit `dist/house-of-cinders-blender-art.zip`. Human art/audio acceptance, playtesting and hosted upload remain separate; nothing published.
+- Current downloads: `dist/gate-to-hell.love`, `dist/gate-to-hell-web.zip`, and editable asset kit `dist/gate-to-hell-blender-art.zip`. Human art/audio acceptance, playtesting and hosted upload remain separate; nothing published.
 - Final Chromium art checks pass all 20 fights, 18 skills, reduced motion, pause, new screen illustrations and all Throne costumes in the gallery with real texture uploads and no captured errors. Current media: `release/screenshots/art-*.png`. Report: `.test-results/missing-art-browser.json`. Native five-second startup passed with expected timeout 124.
 - Firefox 150.0.2 final draft/combat/input/persistence smoke passes with no captured errors.
 - Focused Chromium finale check passes live Empty Throne phases/death, Infinity Key and Hell entry without captured errors (`.test-results/art-finale.json`).

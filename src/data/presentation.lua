@@ -1,6 +1,6 @@
 return {
   version = '0.9.0',
-  title = 'House of Cinders',
+  title = 'Gate to Hell',
   usePortraits = false,
   bailiffSprites = true,
   bossSprites = true,

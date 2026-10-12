@@ -13,10 +13,13 @@ args = parser.parse_args()
 version = json.loads((root / 'package.json').read_text())['version']
 assert 'v' + version in (root / 'web/index.html').read_text()
 assert "version = '" + version + "'" in (root / 'src/data/presentation.lua').read_text()
-with zipfile.ZipFile(out / 'house-of-cinders.love') as z:
+with zipfile.ZipFile(out / 'gate-to-hell.love') as z:
     expected = {'main.lua', 'conf.lua'}
     expected.update(p.relative_to(root).as_posix() for p in (root / 'src').rglob('*.lua'))
     expected.update(p.relative_to(root).as_posix() for p in (root / 'assets').glob('*.txt'))
+    expected.update(p.relative_to(root).as_posix() for p in (root / 'assets/fonts').glob('*.ttf'))
+    expected.update(p.relative_to(root).as_posix() for p in (root / 'assets/fonts').glob('*.txt'))
+    expected.update(p.relative_to(root).as_posix() for p in (root / 'assets/effects/authored').glob('*.png'))
     expected.update('assets/bosses/bailiff_iso/bailiff_y%03d.png' % angle for angle in range(0, 360, 45))
     expected.add('assets/bosses/bailiff_iso/bailiff.json')
     expected.add('assets/bosses/bailiff_iso/portrait.png')
@@ -43,12 +46,12 @@ with zipfile.ZipFile(out / 'house-of-cinders.love') as z:
     assert set(z.namelist()) == expected, 'Release contents do not match the selected asset mode'
     for name in expected:
         assert z.read(name) == (root / name).read_bytes(), name
-with zipfile.ZipFile(out / 'house-of-cinders-web.zip') as z:
+with zipfile.ZipFile(out / 'gate-to-hell-web.zip') as z:
     expected = {'index.html', 'game.js', 'game.data', 'love.js', 'love.wasm', 'LOVE-LICENSE.txt', 'LOVEJS-LICENSE.txt'}
     assert set(z.namelist()) == expected
     for name in expected:
         assert z.read(name) == (out / 'web' / name).read_bytes(), name
-    assert z.read('game.data') == (out / 'house-of-cinders.love').read_bytes()
+    assert z.read('game.data') == (out / 'gate-to-hell.love').read_bytes()
     assert z.read('index.html') == (root / 'web/index.html').read_bytes()
 for line in (out / 'SHA256SUMS').read_text().splitlines():
     digest, name = line.split('  ')

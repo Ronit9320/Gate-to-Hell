@@ -6,7 +6,7 @@ for folder in ['assets/bosses/isometric','assets/effects/combat','assets/scenery
 for name in ['bosses-complete.blend','combat-effects.blend','scenery-and-illustrations.blend','release-cover.blend','bailiff-isometric.blend','bosses-bailiff_hell.blend','combat-effects-reaction_bloom-status_bloom.blend']:files.append(R/'art-src/blender'/name)
 for name in ['build_missing_bosses.py','build_combat_art.py','build_finishing_art.py','build_release_cover.py','finalize_boss_library.py','finalize_combat_source.py','verify_art_sources.py']:files.append(R/'scripts/blender'/name)
 files.extend(R/p for p in ['scripts/verify-art.py','scripts/package-art.py','src/data/boss_sprites.lua','src/data/combat_art.lua','src/render/combat_art.lua','src/render/scenery.lua'])
-target=out/'house-of-cinders-blender-art.zip'
+target=out/'gate-to-hell-blender-art.zip'
 with zipfile.ZipFile(target,'w',zipfile.ZIP_DEFLATED) as z:
  for p in sorted(set(files)):
   assert p.is_file(),p

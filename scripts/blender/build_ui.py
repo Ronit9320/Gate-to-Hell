@@ -1,4 +1,4 @@
-"""Procedurally build pixel-styled UI art for House of Cinders in Blender.
+"""Procedurally build pixel-styled UI art for Gate to Hell in Blender.
 
 Run inside Blender (from the repository root):
 
@@ -35,7 +35,7 @@ COLL = None
 # pixel-clean art with no lighting gradients. Set False for shaded 3D previews.
 FLAT = True
 
-# House of Cinders palette (linear sRGB values fed to Principled base colours).
+# Gate to Hell palette (linear sRGB values fed to Principled base colours).
 C = {
     "gold_hi": (1.00, 0.86, 0.48),
     "gold": (0.86, 0.62, 0.20),

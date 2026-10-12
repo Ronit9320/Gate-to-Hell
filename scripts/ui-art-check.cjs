@@ -5,7 +5,7 @@ module.exports = async ({ p, read, fixture, click, shot, results }) => {
   const path = require('path');
   await p.evaluate(() => {
     for (const name of ['run.sav', 'settings.sav']) {
-      const file = '/home/web_user/love/house-of-cinders/' + name;
+      const file = '/home/web_user/love/gate-to-hell/' + name;
       if (Module.cindersFS.analyzePath(file).exists) Module.cindersFS.unlink(file);
       localStorage.removeItem('cinders:' + name);
     }

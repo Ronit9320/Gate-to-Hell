@@ -123,6 +123,13 @@ return function(test)
     g.newFont = function()
       return {}
     end
+    g.getFont = function()
+      return {
+        getHeight = function()
+          return 18
+        end,
+      }
+    end
     local UI = require('src.ui.draw')
     local count = 0
     local function draw()

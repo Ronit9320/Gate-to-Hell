@@ -1,4 +1,4 @@
-# Build plan — working title: House of Cinders
+# Build plan — Gate to Hell
 
 ## Purpose and status
 

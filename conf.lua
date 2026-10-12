@@ -1,8 +1,8 @@
 function love.conf(t)
-  t.identity = 'house-of-cinders'
+  t.identity = 'gate-to-hell'
   t.version = '11.4'
   t.console = true
-  t.window.title = 'House of Cinders'
+  t.window.title = 'Gate to Hell'
   t.window.width = 1280
   t.window.height = 720
   t.window.resizable = true

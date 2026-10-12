@@ -29,7 +29,7 @@ node scripts/browser-test.cjs --firefox
 node scripts/browser-test.cjs --release-only
 ```
 
-The commands above test the default package with Blender UI, scenery and Bailiff sprites. Use the `--include-art` build command instead when verifying final portraits. Also pass `--include-art` to `python3 scripts/verify-release.py` and `python3 scripts/package-release.py` for that build. `dist/house-of-cinders-web.zip` is the upload, not the source tree. Developer tools, test fixtures, local saves, media and source-generation scripts are excluded.
+The commands above test the default package with Blender UI, scenery and Bailiff sprites. Use the `--include-art` build command instead when verifying final portraits. Also pass `--include-art` to `python3 scripts/verify-release.py` and `python3 scripts/package-release.py` for that build. `dist/gate-to-hell-web.zip` is the upload, not the source tree. Developer tools, test fixtures, local saves, media and source-generation scripts are excluded.
 
 ## Adopted Blender boss sprites
 

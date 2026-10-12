@@ -1,4 +1,4 @@
--- Pixel-art UI skin for House of Cinders.
+-- Pixel-art UI skin for Gate to Hell.
 -- Frames are assembled only from axis-aligned rectangles: hard corners, chunky
 -- bevels and cut (notched) corners, so they read as pixel art and stay crisp
 -- when the window is scaled. Coordinates are snapped to whole pixels. The

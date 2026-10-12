@@ -137,10 +137,13 @@ function love.update(dt)
   UI.largeText = app.settings.largeText
   UI.shake = app.settings.shake
   UI.itemKeys = app.settings.firstItemKey:upper() .. ' / ' .. app.settings.secondItemKey:upper()
+  UI.skillKey = app.settings.skillKey:upper()
+  UI.dodgeKey = app.settings.dodgeKey:upper()
   if app.screen == 'arena' and not app.paused and not app.modal and not app.lab then
     local damageBefore, reactionsBefore = app.arena.stats.damage, app.arena.stats.reactions
     local hurtBefore = app.arena.hurtSequence
     local impactBefore = app.arena.impactSequence
+    local skillBefore = app.arena.skillSequence
     local x, y = move()
     app.arena.debugInvulnerable = Dev and app.devRun and Dev.invulnerable or false
     local remaining = math.min(dt, 0.1) * (Dev and app.devRun and Dev.speed or 1)
@@ -154,6 +157,9 @@ function love.update(dt)
       if app.arena:attack(tx, ty) then
         sound('attack')
       end
+    end
+    if app.arena.skillSequence > skillBefore then
+      sound('skill')
     end
     if app.arena.stats.reactions > reactionsBefore then
       sound('reaction')
@@ -211,7 +217,7 @@ local function requestNew(mode)
 end
 local function title()
   UI.text('A ROGUELIKE BOSS BATTLER', 80, 95, 14, { 0.73, 0.63, 0.42 })
-  UI.text('HOUSE OF\nCINDERS', 76, 143, 78, { 0.96, 0.88, 0.69 }, 750)
+  UI.text('GATE TO\nHELL', 76, 143, 78, { 0.96, 0.88, 0.69 }, 750)
   UI.text('One hero. Ten floors. A house that never folds.', 82, 355, 23, { 0.57, 0.73, 0.69 }, 650)
   UI.text(
     'Draft your hand. Master the elements.\nRecruit a team and challenge the endless House.',
@@ -251,7 +257,11 @@ local function title()
   end)
   UI.card('jack', 900, 155, 260, 365)
   UI.text(
-    'WASD / arrows move · mouse aims · click attacks\nE / right click skill · Space dodge · Esc pause',
+    'WASD / arrows move · mouse aims · hold click to attack\n'
+      .. app.settings.skillKey:upper()
+      .. ' / right click skill · '
+      .. app.settings.dodgeKey:upper()
+      .. ' dodge · Esc pause',
     82,
     600,
     16,
@@ -492,9 +502,9 @@ local function modal()
       690
     )
   elseif m.kind == 'credits' then
-    UI.text('HOUSE OF CINDERS', 286, 158, 30)
+    UI.text('GATE TO HELL', 286, 158, 30)
     UI.text(
-      'Version 0.9.0 · Single-player boss battler\n\nGame systems, synthesized music and sounds:\nthis project. Heroes, UI and animated arena scenery:\noriginal geometry modeled and rendered in Blender.\nHero models inspired by the preserved 2D references.\nAll bosses, Hell costumes and combat effects: Blender.\nBailiff sprites: provided rig, refined in Blender.\nFlat source portraits: DreamLayer; excluded by default.\nRuntime: LÖVE 11.4 / 11.5; love.js 11.4.1 (MIT).\nSee packaged attribution and license files for details.',
+      'Version 0.9.0 · Single-player boss battler\n\nGame systems, synthesized music and sounds:\nthis project. Heroes, UI and animated arena scenery:\noriginal geometry modeled and rendered in Blender.\nHero models inspired by the preserved 2D references.\nBosses, Hell costumes and skill effects: Blender.\nSelected hit, critical, slash and shock FX: DreamLayer.\nFonts: Cinzel / Adwaita Sans (SIL Open Font License).\nRuntime: LÖVE 11.4 / 11.5; love.js 11.4.1 (MIT).\nSee packaged attribution and license files for details.',
       286,
       220,
       19,
@@ -755,7 +765,7 @@ function love.draw()
   UI.hoverTip = nil
   UI.mx, UI.my = mouse()
   UTex.sprite('ember_seal', 73, 43, 35)
-  UI.text('HOUSE OF CINDERS', 135, 35, 14, { 0.53, 0.68, 0.65 })
+  UI.text('GATE TO HELL', 135, 35, 14, { 0.53, 0.68, 0.65 })
   if app.run and app.screen ~= 'title' then
     UI.text(
       'SEED ' .. app.run.seed .. '    ' .. M.floorInfo(app.run),
@@ -1016,14 +1026,13 @@ function love.keypressed(k)
       end
     elseif k == app.settings.skillKey then
       local x, y = aim()
-      if app.arena:attack(x, y, true) then
+      if app.arena:requestSkill(x, y) then
         sound('skill')
       end
     elseif k == app.settings.dodgeKey then
-      if app.arena:hero().dodgeCd <= 0 then
+      if app.arena:dodgeStart(move()) then
         sound('dodge')
       end
-      app.arena:dodgeStart(move())
     elseif k == app.settings.firstItemKey then
       if not app.arena:consume(1) then
         app.message = 'Consumable 1 cannot be used now.'

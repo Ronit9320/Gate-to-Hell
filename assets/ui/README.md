@@ -1,4 +1,4 @@
-# House of Cinders — Blender UI and arena library
+# Gate to Hell — Blender UI and arena library
 
 Open `preview.html` in a browser to view the floor variants, looping objects,
 button states, element medallions and item icons. It works without a server.

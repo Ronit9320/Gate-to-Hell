@@ -1,4 +1,4 @@
-# House of Cinders — reference-inspired isometric heroes
+# Gate to Hell — reference-inspired isometric heroes
 
 All 18 heroes have actual articulated Blender geometry, eight facing directions
 and seven animations. Their original 2D portraits remain untouched in the parent

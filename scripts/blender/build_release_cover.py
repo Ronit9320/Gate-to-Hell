@@ -3,7 +3,7 @@ import bpy, math, pathlib
 from mathutils import Vector, Matrix
 R=pathlib.Path(__file__).resolve().parents[2]
 bpy.ops.wm.open_mainfile(filepath=str(R/'art-src/blender/bosses-complete.blend'))
-cover=bpy.data.scenes.new('House of Cinders cover');cover.render.engine='CYCLES';cover.cycles.samples=24;cover.cycles.use_denoising=True;cover.render.threads_mode='FIXED';cover.render.threads=4;cover.render.resolution_x=630;cover.render.resolution_y=500;cover.render.resolution_percentage=100;cover.render.image_settings.file_format='PNG';cover.render.film_transparent=False;cover.view_settings.view_transform='Standard'
+cover=bpy.data.scenes.new('Gate to Hell cover');cover.render.engine='CYCLES';cover.cycles.samples=24;cover.cycles.use_denoising=True;cover.render.threads_mode='FIXED';cover.render.threads=4;cover.render.resolution_x=630;cover.render.resolution_y=500;cover.render.resolution_percentage=100;cover.render.image_settings.file_format='PNG';cover.render.film_transparent=False;cover.view_settings.view_transform='Standard'
 cover.world=bpy.data.worlds.new('Cover world');cover.world.use_nodes=True;bg=next(n for n in cover.world.node_tree.nodes if n.type=='BACKGROUND');bg.inputs[0].default_value=(.02,.043,.048,1);bg.inputs[1].default_value=.7
 cam=bpy.data.objects.new('Cover camera',bpy.data.cameras.new('Cover camera'));cover.collection.objects.link(cam);target=Vector((0,0,1.4));cam.location=target+Vector((6,-6,math.sqrt(24)));cam.rotation_euler=(target-cam.location).to_track_quat('-Z','Y').to_euler();cam.data.type='ORTHO';cam.data.ortho_scale=5.3;cam.data.sensor_fit='HORIZONTAL';cover.camera=cam
 right=cam.rotation_euler.to_matrix()@Vector((1,0,0));up=cam.rotation_euler.to_matrix()@Vector((0,1,0));normal=cam.rotation_euler.to_matrix()@Vector((0,0,1))
@@ -21,5 +21,5 @@ def mat(name,col,glow):
 gold=mat('Cover gold',(.93,.65,.22),.5);pale=mat('Cover ivory',(.58,.77,.74),.6)
 def text(label,y,size,material):
  c=bpy.data.curves.new(label,'FONT');c.body=label;c.align_x='CENTER';c.size=size;c.extrude=.003;c.space_character=1.1;o=bpy.data.objects.new(label,c);cover.collection.objects.link(o);o.location=target+up*y+normal*2;o.rotation_euler=cam.rotation_euler;o.data.materials.append(material)
-text('HOUSE OF',1.18,.42,gold);text('CINDERS',.58,.62,gold);text('BUILD YOUR HAND. BREAK THE HOUSE.',.20,.125,pale);text('18 HEROES  /  10 BOSSES  /  ENDLESS HELL',-1.88,.115,pale)
+text('GATE TO',1.18,.42,gold);text('HELL',.58,.62,gold);text('BUILD YOUR HAND. BREAK THE HOUSE.',.20,.125,pale);text('18 HEROES  /  10 BOSSES  /  ENDLESS HELL',-1.88,.115,pale)
 source=R/'art-src/blender/release-cover.blend';bpy.ops.wm.save_as_mainfile(filepath=str(source));cover.render.filepath=str(R/'release/cover-blender.png');bpy.ops.render.render(write_still=True)

@@ -1,8 +1,18 @@
-# House of Cinders
+# Gate to Hell
 
 Working title for a single-player roguelike boss battler, built with **LÖVE 2D and Lua** for a **browser-based itch.io game jam release**. Combine Balatro-inspired hero cards and shop management with real-time combat in isometric arenas. Elemental skills and reactions drive team synergies, with visible damage numbers and readable boss attack telegraphs.
 
 **Status:** Version 0.9.0 implements the game through Phase 8 and prepares the native/browser upload packages and listing materials. All 18 heroes, 23 items, ten normal bosses and ten Hell variants are playable; settings, elemental icons, synthesized music/SFX and credits are included. The UI uses original Blender frames, medallions, resource/action icons, animated objects and nine element-themed stone arenas. A four-page How to Play guide explains the run, combat, reactions and team building. All nine elements have Blender particle animations connected to casts, impacts, projectiles and fields. All 18 heroes now have reference-inspired Blender isometric models and seven animations in eight directions; the Ash Bailiff also uses Blender isometric animations. All ten bosses now use Blender isometric sprites, with ten distinct Hell costumes, stagger/recovery poses and three Empty Throne phase appearances. A dedicated library of 91 animated effect sheets covers attacks, skills, reactions, statuses and hazards. Ten boss scenery props and four screen illustrations are integrated. Original flat portraits are preserved but excluded by default. See [release/UPLOAD_CHECKLIST.md](release/UPLOAD_CHECKLIST.md) and [release/ART_REPLACEMENT.md](release/ART_REPLACEMENT.md). Human acceptance, authored audio replacements and hosted/jam checks remain open; nothing has been published.
+
+## Submission polish — 12 October 2026
+
+Selected DreamLayer hit, critical, slash and shockwave cutouts from `release/fx-dreamlayer/` now animate in combat. Hazard warnings retain their existing masks and safe gaps; reduced motion freezes effect scale/rotation and lowers opacity. The other generated FX remain source candidates in `release/`.
+
+Cinzel headings and Adwaita Sans body text replace the default typeface. Both fonts and their OFL notices ship locally. Buttons center text using actual font metrics, combat shows the configured skill/dodge keys, fallen heroes no longer show ready abilities, and the last-hit readout is simplified.
+
+Skills pressed up to 180 ms before recovery ends are buffered once, with the buffer cleared on hero switch. Dodging without movement follows the hero's facing; rejected dodges no longer play a success sound. Existing damage, boss health, shop economy and save format are preserved.
+
+The browser loader starts the game before its optional IndexedDB cache write finishes, avoiding a stall after the download reaches 100%.
 
 ## Pending asset checklist
 
@@ -222,7 +232,7 @@ npm run build
 npm run serve
 ```
 
-Open `http://localhost:8000` after starting the server. `dist/house-of-cinders.love` runs with LÖVE; `dist/house-of-cinders-web.zip` contains the browser package with root `index.html`. `dist/SHA256SUMS` records checksums. Two consecutive builds were byte-identical. No network is required by the exported game.
+Open `http://localhost:8000` after starting the server. `dist/gate-to-hell.love` runs with LÖVE; `dist/gate-to-hell-web.zip` contains the browser package with root `index.html`. `dist/SHA256SUMS` records checksums. Two consecutive builds were byte-identical. No network is required by the exported game.
 
 The title offers **New run**, **Two-fight demo**, and **Continue saved run** when available. The full run includes ten distinct elemental floors, their Hell variants, and the full item catalog. Starting a new run asks before replacing saved progress. Continue after leaving a fight restores its entry snapshot. A storage warning means progress may last only for the current session.
 

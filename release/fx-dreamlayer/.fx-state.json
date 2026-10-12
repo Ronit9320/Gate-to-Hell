@@ -1,0 +1,29 @@
+{
+ "running": {},
+ "done": [
+  "hit_burst",
+  "critical_burst",
+  "slash_arc",
+  "impact_wave",
+  "explosion_fire",
+  "sheet_explosion",
+  "sheet_v2"
+ ],
+ "assets": {
+  "hit_burst": "c33186fd-d0c7-43e0-b6c4-0a1b1d1c7706",
+  "critical_burst": "5d369f3c-61ad-4281-a45a-f95ae69db0f7",
+  "impact_wave": "5ae7f772-4045-4f9e-a05d-7e0c4f3262ec",
+  "slash_arc": "ee6f9a34-585b-4b62-a7d3-67bddcb099f3",
+  "explosion_fire": "321bd320-3590-4106-9aff-b92e7df928b4",
+  "sheet_v2": "44323d83-d76c-413a-9055-7ce3cb07193e"
+ },
+ "running_nobg": {},
+ "done_nobg": [
+  "hit_burst",
+  "critical_burst",
+  "impact_wave",
+  "slash_arc",
+  "explosion_fire",
+  "sheet_v2"
+ ]
+}
