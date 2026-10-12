@@ -1,0 +1,82 @@
+{
+  "width": 192,
+  "height": 192,
+  "columns": 8,
+  "rows": 5,
+  "anchor_x": 96,
+  "anchor_y": 146,
+  "scale": 0.85,
+  "bosses": [
+    "bailiff_hell",
+    "undertow",
+    "kite",
+    "bedrock",
+    "bramble",
+    "regent",
+    "static",
+    "sun",
+    "kings",
+    "throne",
+    "undertow_hell",
+    "kite_hell",
+    "bedrock_hell",
+    "bramble_hell",
+    "regent_hell",
+    "static_hell",
+    "sun_hell",
+    "kings_hell",
+    "throne_hell",
+    "throne_phase2",
+    "throne_phase3",
+    "throne_hell_phase2",
+    "throne_hell_phase3"
+  ],
+  "directions": [
+    0,
+    45,
+    90,
+    135,
+    180,
+    225,
+    270,
+    315
+  ],
+  "animations": {
+    "idle": {
+      "offset": 0,
+      "frames": 8,
+      "fps": 12,
+      "loop": true
+    },
+    "attack": {
+      "offset": 8,
+      "frames": 10,
+      "fps": 12,
+      "loop": false
+    },
+    "hurt": {
+      "offset": 18,
+      "frames": 4,
+      "fps": 12,
+      "loop": false
+    },
+    "death": {
+      "offset": 22,
+      "frames": 10,
+      "fps": 10,
+      "loop": false
+    },
+    "stagger": {
+      "offset": 32,
+      "frames": 4,
+      "fps": 8,
+      "loop": true
+    },
+    "recovery": {
+      "offset": 36,
+      "frames": 4,
+      "fps": 12,
+      "loop": false
+    }
+  }
+}

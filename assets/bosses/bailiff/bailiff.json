@@ -1,0 +1,16 @@
+{
+  "character": "The Ash Bailiff",
+  "generated": "isometric 3D render -> 2D sprite sheets",
+  "frame_size": [128, 128],
+  "directions": ["y000", "y045", "y090", "y135", "y180", "y225", "y270", "y315"],
+  "direction_sheet": "bailiff_<dir>.png",
+  "animations": [
+    { "name": "idle",   "row": 0, "frames": 7,  "fps": 12, "loop": true,  "note": "breathing + sway" },
+    { "name": "attack", "row": 1, "frames": 10, "fps": 12, "loop": false, "note": "summon windup -> ember slam" },
+    { "name": "dodge",  "row": 2, "frames": 8,  "fps": 12, "loop": false, "note": "crouch -> back hop -> land" },
+    { "name": "hurt",   "row": 3, "frames": 6,  "fps": 12, "loop": false, "note": "recoil" },
+    { "name": "death",  "row": 4, "frames": 10, "fps": 8,  "loop": false, "note": "buckle -> collapse" }
+  ],
+  "source_blend": "/tmp/opencode/bailiff.blend",
+  "previews": "art-src/previews/bailiff/"
+}

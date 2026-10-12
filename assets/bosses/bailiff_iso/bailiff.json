@@ -1,0 +1,70 @@
+{
+  "character": "The Ash Bailiff",
+  "version": 1,
+  "frame_width": 256,
+  "frame_height": 256,
+  "columns": 8,
+  "rows": 5,
+  "anchor_x": 128,
+  "anchor_y": 204,
+  "display_scale": 0.55,
+  "camera": {
+    "projection": "orthographic",
+    "elevation_degrees": 30,
+    "azimuth_degrees": 45,
+    "ortho_scale": 3.5
+  },
+  "direction_order": [
+    "southwest",
+    "south",
+    "southeast",
+    "east",
+    "northeast",
+    "north",
+    "northwest",
+    "west"
+  ],
+  "direction_angles": [
+    0,
+    45,
+    90,
+    135,
+    180,
+    225,
+    270,
+    315
+  ],
+  "direction_pattern": "bailiff_y%03d.png",
+  "animations": {
+    "idle": {
+      "offset": 0,
+      "frames": 8,
+      "fps": 12,
+      "loop": true
+    },
+    "attack": {
+      "offset": 8,
+      "frames": 10,
+      "fps": 12,
+      "loop": false
+    },
+    "walk": {
+      "offset": 18,
+      "frames": 8,
+      "fps": 12,
+      "loop": true
+    },
+    "hurt": {
+      "offset": 26,
+      "frames": 4,
+      "fps": 12,
+      "loop": false
+    },
+    "death": {
+      "offset": 30,
+      "frames": 10,
+      "fps": 10,
+      "loop": false
+    }
+  }
+}

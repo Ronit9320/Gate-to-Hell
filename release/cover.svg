@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="630" height="500" viewBox="0 0 630 500">
+<defs><radialGradient id="bg"><stop stop-color="#24423e"/><stop offset="1" stop-color="#091114"/></radialGradient><linearGradient id="gold" x2="0" y2="1"><stop stop-color="#f9df9b"/><stop offset="1" stop-color="#b78d4d"/></linearGradient></defs>
+<rect width="630" height="500" fill="url(#bg)"/><rect x="18" y="18" width="594" height="464" rx="8" fill="none" stroke="#8a7246"/>
+<path d="M70 352L315 225 560 352 315 467Z" fill="#102c2c" stroke="#42655b"/><path d="M100 352L315 240 530 352 315 451Z" fill="none" stroke="#31534b"/>
+<g fill="#11252a" stroke="#b9955a" stroke-width="2"><rect x="195" y="238" width="108" height="154" rx="10" transform="rotate(-14 249 315)"/><rect x="327" y="238" width="108" height="154" rx="10" transform="rotate(14 381 315)"/><rect x="259" y="222" width="112" height="162" rx="10"/></g>
+<circle cx="315" cy="297" r="34" fill="none" stroke="#ca9d60"/><path d="M315 265L299 296 313 291 304 328 334 290 319 294Z" fill="#f3b56b"/>
+<path d="M223 276Q208 302 233 309Q255 302 238 276L232 263Z" fill="#71bed2"/><path d="M397 271L374 302 397 318 416 291Z" fill="none" stroke="#b1c9a0" stroke-width="3"/>
+<g fill="url(#gold)" text-anchor="middle" font-family="Georgia,serif"><text x="315" y="79" font-size="19" letter-spacing="7">ENTER THE</text><text x="315" y="139" font-size="58" letter-spacing="2">HOUSE OF</text><text x="315" y="199" font-size="65" letter-spacing="4">CINDERS</text></g>
+<text x="315" y="434" fill="#e2d8ba" text-anchor="middle" font-family="sans-serif" font-size="14" letter-spacing="3">THREE HEROES. NINE ELEMENTS.</text><text x="315" y="458" fill="#a7bbae" text-anchor="middle" font-family="sans-serif" font-size="13" letter-spacing="4">TEN FLOORS. ENDLESS HELL.</text>
+</svg>

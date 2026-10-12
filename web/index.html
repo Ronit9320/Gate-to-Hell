@@ -1,0 +1,16 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,"><title>House of Cinders</title>
+<style>*{box-sizing:border-box}body{margin:0;background:#091114;color:#ecdec2;font:14px system-ui;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center}canvas{max-width:100vw;max-height:calc(100vh - 40px);object-fit:contain;outline:none}header{height:40px;display:flex;align-items:center;gap:24px}button{background:#203b3d;border:1px solid #b9955a;color:inherit;padding:5px 16px;cursor:pointer}#status{position:absolute;top:45%;background:#13272d;padding:20px}#warning{color:#ffb484}</style>
+<header><span>HOUSE OF CINDERS · v0.9.0</span><button id="full">Fullscreen</button><span id="warning"></span></header><div id="status">Loading the House…</div><canvas aria-label="House of Cinders game. Click to focus. F1 opens controls." id="canvas" tabindex="0" oncontextmenu="event.preventDefault()"></canvas>
+<script>
+const canvas=document.getElementById('canvas'),statusEl=document.getElementById('status');
+let storageOK=true,syncing=false;const saveRoot='/home/web_user/love/house-of-cinders';
+function warn(e){storageOK=false;document.getElementById('warning').textContent='Storage unavailable — progress lasts this session only.';console.warn(String(e));}
+function persist(){if(!storageOK||!Module.cindersFS||syncing)return;syncing=true;try{const F=Module.cindersFS;for(const name of ['run.sav','settings.sav','proof.txt']){const p=saveRoot+'/'+name;if(F.analyzePath(p).exists)localStorage.setItem('cinders:'+name,F.readFile(p,{encoding:'utf8'}));}}catch(e){warn(e);}finally{syncing=false;}}
+var Module={arguments:['./game.love'],INITIAL_MEMORY:268435456,canvas,print:console.log,printErr:console.error,
+preRun:[function(){try{const F=Module.cindersFS;F.mkdirTree(saveRoot);for(const name of ['run.sav','settings.sav','proof.txt']){let s=localStorage.getItem('cinders:'+name);if(s!==null)F.writeFile(saveRoot+'/'+name,s);}const close=F.close;F.close=function(stream){const p=stream.path;close(stream);if(p&&p.startsWith(saveRoot))persist();};}catch(e){warn(e);}}],
+setStatus(t){if(t)statusEl.textContent=t;else statusEl.hidden=true;},monitorRunDependencies(n){if(!n)statusEl.hidden=true;},onAbort(t){statusEl.hidden=false;statusEl.textContent='Unable to start. Reload to retry. '+t;}};
+canvas.addEventListener('pointerdown',()=>canvas.focus());window.addEventListener('keydown',e=>{if(document.activeElement===canvas && ['Tab','Enter','Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code))e.preventDefault();});window.addEventListener('pagehide',persist);
+document.getElementById('full').onclick=async()=>{try{await canvas.requestFullscreen();canvas.focus();}catch(e){document.getElementById('warning').textContent='Fullscreen unavailable. You can keep playing in this window.';}};window.onerror=(e)=>{statusEl.hidden=false;statusEl.textContent='Game error: '+e;};
+function loadFailed(){statusEl.hidden=false;statusEl.textContent='Download failed. Check your connection and reload to retry.';}
+function applicationLoad(){Love(Module);}
+</script><script src="game.js" onerror="loadFailed()"></script><script src="love.js" onerror="loadFailed()" onload="applicationLoad()"></script></html>

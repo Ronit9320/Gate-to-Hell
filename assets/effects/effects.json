@@ -1,0 +1,47 @@
+{
+  "elements": [
+    "Pyro",
+    "Hydro",
+    "Anemo",
+    "Geo",
+    "Dendro",
+    "Cryo",
+    "Electro",
+    "Gravity",
+    "Antimatter"
+  ],
+  "cell": [
+    192,
+    192
+  ],
+  "columns": 6,
+  "frames": 12,
+  "duration": 0.6,
+  "source": "art-src/blender/element-effects.blend",
+  "icons": [
+    "heart",
+    "shield",
+    "attack",
+    "skill",
+    "dodge",
+    "ammo",
+    "bag",
+    "team",
+    "shop",
+    "reroll",
+    "door",
+    "help",
+    "settings",
+    "sound",
+    "save",
+    "trophy",
+    "death",
+    "check",
+    "close",
+    "pause",
+    "play",
+    "back",
+    "floor",
+    "reaction"
+  ]
+}

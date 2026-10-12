@@ -1,0 +1,560 @@
+{
+  "width": 128,
+  "height": 128,
+  "columns": 4,
+  "rows": 2,
+  "frames": 8,
+  "anchor": [
+    64,
+    64
+  ],
+  "effects": {
+    "slash": {
+      "family": "slash",
+      "color": "neutral",
+      "duration": 0.48,
+      "loop": false
+    },
+    "projectile": {
+      "family": "lance",
+      "color": "neutral",
+      "duration": 0.48,
+      "loop": false
+    },
+    "muzzle": {
+      "family": "burst",
+      "color": "neutral",
+      "duration": 0.48,
+      "loop": false
+    },
+    "trail": {
+      "family": "gust",
+      "color": "neutral",
+      "duration": 0.48,
+      "loop": false
+    },
+    "hit": {
+      "family": "burst",
+      "color": "neutral",
+      "duration": 0.48,
+      "loop": false
+    },
+    "critical": {
+      "family": "critical",
+      "color": "neutral",
+      "duration": 0.48,
+      "loop": false
+    },
+    "hurt": {
+      "family": "critical",
+      "color": "red",
+      "duration": 0.48,
+      "loop": false
+    },
+    "shield_create": {
+      "family": "shield",
+      "color": "shield",
+      "duration": 0.48,
+      "loop": false
+    },
+    "shield_absorb": {
+      "family": "shield",
+      "color": "shield",
+      "duration": 0.48,
+      "loop": false
+    },
+    "shield_break": {
+      "family": "shatter",
+      "color": "shield",
+      "duration": 0.48,
+      "loop": false
+    },
+    "slam": {
+      "family": "slam",
+      "color": "geo",
+      "duration": 0.7,
+      "loop": false
+    },
+    "dust": {
+      "family": "steam",
+      "color": "geo",
+      "duration": 0.48,
+      "loop": false
+    },
+    "dot": {
+      "family": "tick",
+      "color": "neutral",
+      "duration": 0.48,
+      "loop": false
+    },
+    "dodge": {
+      "family": "gust",
+      "color": "shield",
+      "duration": 0.48,
+      "loop": false
+    },
+    "switch_out": {
+      "family": "collapse",
+      "color": "shield",
+      "duration": 0.48,
+      "loop": false
+    },
+    "switch_in": {
+      "family": "orbit",
+      "color": "shield",
+      "duration": 0.48,
+      "loop": false
+    },
+    "reload_start": {
+      "family": "reload",
+      "color": "neutral",
+      "duration": 0.48,
+      "loop": false
+    },
+    "reload_complete": {
+      "family": "reload",
+      "color": "heal",
+      "duration": 0.48,
+      "loop": false
+    },
+    "phase": {
+      "family": "orbit",
+      "color": "antimatter",
+      "duration": 0.7,
+      "loop": false
+    },
+    "stagger": {
+      "family": "binding",
+      "color": "neutral",
+      "duration": 0.48,
+      "loop": false
+    },
+    "recovery": {
+      "family": "orbit",
+      "color": "neutral",
+      "duration": 0.48,
+      "loop": false
+    },
+    "defeat": {
+      "family": "shatter",
+      "color": "antimatter",
+      "duration": 0.7,
+      "loop": false
+    },
+    "heal": {
+      "family": "heal",
+      "color": "heal",
+      "duration": 0.48,
+      "loop": false
+    },
+    "cooldown": {
+      "family": "orbit",
+      "color": "anemo",
+      "duration": 0.48,
+      "loop": false
+    },
+    "skill_jack": {
+      "family": "fan",
+      "color": "pyro",
+      "duration": 0.65,
+      "loop": true
+    },
+    "skill_match": {
+      "family": "ring",
+      "color": "pyro",
+      "duration": 0.65,
+      "loop": true
+    },
+    "skill_penny": {
+      "family": "lance",
+      "color": "hydro",
+      "duration": 0.65,
+      "loop": true
+    },
+    "skill_dealer": {
+      "family": "wave",
+      "color": "hydro",
+      "duration": 0.65,
+      "loop": true
+    },
+    "skill_gale": {
+      "family": "gust",
+      "color": "anemo",
+      "duration": 0.65,
+      "loop": true
+    },
+    "skill_zephyr": {
+      "family": "cyclone",
+      "color": "anemo",
+      "duration": 0.65,
+      "loop": true
+    },
+    "skill_flint": {
+      "family": "slam",
+      "color": "geo",
+      "duration": 0.65,
+      "loop": true
+    },
+    "skill_mason": {
+      "family": "eruption",
+      "color": "geo",
+      "duration": 0.65,
+      "loop": true
+    },
+    "skill_clover": {
+      "family": "thorns",
+      "color": "dendro",
+      "duration": 0.65,
+      "loop": true
+    },
+    "skill_briar": {
+      "family": "bramble",
+      "color": "dendro",
+      "duration": 0.65,
+      "loop": true
+    },
+    "skill_frost": {
+      "family": "fan",
+      "color": "cryo",
+      "duration": 0.65,
+      "loop": true
+    },
+    "skill_whiteout": {
+      "family": "frost",
+      "color": "cryo",
+      "duration": 0.65,
+      "loop": true
+    },
+    "skill_volt": {
+      "family": "lightning",
+      "color": "electro",
+      "duration": 0.65,
+      "loop": true
+    },
+    "skill_count": {
+      "family": "marks",
+      "color": "electro",
+      "duration": 0.65,
+      "loop": true
+    },
+    "skill_crown": {
+      "family": "collapse",
+      "color": "gravity",
+      "duration": 0.65,
+      "loop": true
+    },
+    "skill_oracle": {
+      "family": "orbit",
+      "color": "gravity",
+      "duration": 0.65,
+      "loop": true
+    },
+    "skill_null": {
+      "family": "lance",
+      "color": "antimatter",
+      "duration": 0.65,
+      "loop": true
+    },
+    "skill_laugh": {
+      "family": "detonation",
+      "color": "antimatter",
+      "duration": 0.65,
+      "loop": true
+    },
+    "reaction_steam_burst": {
+      "family": "steam",
+      "color": "hydro",
+      "duration": 0.8,
+      "loop": false
+    },
+    "reaction_thaw": {
+      "family": "shatter",
+      "color": "pyro",
+      "duration": 0.8,
+      "loop": false
+    },
+    "reaction_frostbind": {
+      "family": "binding",
+      "color": "cryo",
+      "duration": 0.8,
+      "loop": false
+    },
+    "reaction_live_wire": {
+      "family": "lightning",
+      "color": "electro",
+      "duration": 0.8,
+      "loop": false
+    },
+    "reaction_flashover": {
+      "family": "critical",
+      "color": "pyro",
+      "duration": 0.8,
+      "loop": false
+    },
+    "reaction_kindling": {
+      "family": "flame",
+      "color": "pyro",
+      "duration": 0.8,
+      "loop": false
+    },
+    "reaction_bloom": {
+      "family": "bloom",
+      "color": "dendro",
+      "duration": 0.8,
+      "loop": false
+    },
+    "reaction_overgrowth": {
+      "family": "bramble",
+      "color": "dendro",
+      "duration": 0.8,
+      "loop": false
+    },
+    "reaction_crosswind": {
+      "family": "cyclone",
+      "color": "anemo",
+      "duration": 0.8,
+      "loop": false
+    },
+    "reaction_gilded_guard": {
+      "family": "shield",
+      "color": "geo",
+      "duration": 0.8,
+      "loop": false
+    },
+    "reaction_collapse": {
+      "family": "collapse",
+      "color": "gravity",
+      "duration": 0.8,
+      "loop": false
+    },
+    "reaction_annihilation": {
+      "family": "shatter",
+      "color": "antimatter",
+      "duration": 0.8,
+      "loop": false
+    },
+    "reaction_event_horizon": {
+      "family": "horizon",
+      "color": "antimatter",
+      "duration": 0.8,
+      "loop": false
+    },
+    "aura_pyro": {
+      "family": "orbit",
+      "color": "pyro",
+      "duration": 1.2,
+      "loop": true
+    },
+    "aura_hydro": {
+      "family": "orbit",
+      "color": "hydro",
+      "duration": 1.2,
+      "loop": true
+    },
+    "aura_anemo": {
+      "family": "orbit",
+      "color": "anemo",
+      "duration": 1.2,
+      "loop": true
+    },
+    "aura_geo": {
+      "family": "orbit",
+      "color": "geo",
+      "duration": 1.2,
+      "loop": true
+    },
+    "aura_dendro": {
+      "family": "orbit",
+      "color": "dendro",
+      "duration": 1.2,
+      "loop": true
+    },
+    "aura_cryo": {
+      "family": "orbit",
+      "color": "cryo",
+      "duration": 1.2,
+      "loop": true
+    },
+    "aura_electro": {
+      "family": "orbit",
+      "color": "electro",
+      "duration": 1.2,
+      "loop": true
+    },
+    "aura_gravity": {
+      "family": "orbit",
+      "color": "gravity",
+      "duration": 1.2,
+      "loop": true
+    },
+    "aura_antimatter": {
+      "family": "orbit",
+      "color": "antimatter",
+      "duration": 1.2,
+      "loop": true
+    },
+    "status_burn": {
+      "family": "flame",
+      "color": "pyro",
+      "duration": 1.2,
+      "loop": true
+    },
+    "status_electric": {
+      "family": "lightning",
+      "color": "electro",
+      "duration": 1.2,
+      "loop": true
+    },
+    "status_vulnerable": {
+      "family": "bramble",
+      "color": "dendro",
+      "duration": 1.2,
+      "loop": true
+    },
+    "status_shield": {
+      "family": "shield",
+      "color": "shield",
+      "duration": 1.2,
+      "loop": true
+    },
+    "status_stagger": {
+      "family": "binding",
+      "color": "cryo",
+      "duration": 1.2,
+      "loop": true
+    },
+    "status_bloom": {
+      "family": "bloom",
+      "color": "dendro",
+      "duration": 1.2,
+      "loop": true
+    },
+    "hazard_flame": {
+      "family": "flame",
+      "color": "pyro",
+      "duration": 0.8,
+      "loop": true
+    },
+    "hazard_water": {
+      "family": "wave",
+      "color": "hydro",
+      "duration": 0.8,
+      "loop": true
+    },
+    "hazard_wind": {
+      "family": "gust",
+      "color": "anemo",
+      "duration": 0.8,
+      "loop": true
+    },
+    "hazard_pillar": {
+      "family": "pillar",
+      "color": "geo",
+      "duration": 0.8,
+      "loop": true
+    },
+    "hazard_rock": {
+      "family": "slam",
+      "color": "geo",
+      "duration": 0.8,
+      "loop": true
+    },
+    "hazard_bramble": {
+      "family": "bramble",
+      "color": "dendro",
+      "duration": 0.8,
+      "loop": true
+    },
+    "hazard_ignition": {
+      "family": "flame",
+      "color": "pyro",
+      "duration": 0.8,
+      "loop": true
+    },
+    "hazard_ice": {
+      "family": "frost",
+      "color": "cryo",
+      "duration": 0.8,
+      "loop": true
+    },
+    "hazard_shatter": {
+      "family": "shatter",
+      "color": "cryo",
+      "duration": 0.8,
+      "loop": true
+    },
+    "hazard_grid": {
+      "family": "lightning",
+      "color": "electro",
+      "duration": 0.8,
+      "loop": true
+    },
+    "hazard_strike": {
+      "family": "marks",
+      "color": "electro",
+      "duration": 0.8,
+      "loop": true
+    },
+    "hazard_spiral": {
+      "family": "cyclone",
+      "color": "pyro",
+      "duration": 0.8,
+      "loop": true
+    },
+    "hazard_pull": {
+      "family": "collapse",
+      "color": "gravity",
+      "duration": 0.8,
+      "loop": true
+    },
+    "hazard_push": {
+      "family": "orbit",
+      "color": "gravity",
+      "duration": 0.8,
+      "loop": true
+    },
+    "hazard_mass": {
+      "family": "slam",
+      "color": "gravity",
+      "duration": 0.8,
+      "loop": true
+    },
+    "hazard_void": {
+      "family": "detonation",
+      "color": "antimatter",
+      "duration": 0.8,
+      "loop": true
+    },
+    "hazard_wave_void": {
+      "family": "wave",
+      "color": "antimatter",
+      "duration": 0.8,
+      "loop": true
+    },
+    "hazard_zone": {
+      "family": "horizon",
+      "color": "antimatter",
+      "duration": 0.8,
+      "loop": true
+    },
+    "consume_flask": {
+      "family": "heal",
+      "color": "heal",
+      "duration": 0.65,
+      "loop": false
+    },
+    "consume_aegis": {
+      "family": "shield",
+      "color": "shield",
+      "duration": 0.65,
+      "loop": false
+    },
+    "consume_wind": {
+      "family": "orbit",
+      "color": "anemo",
+      "duration": 0.65,
+      "loop": false
+    }
+  },
+  "source": "art-src/blender/combat-effects.blend"
+}

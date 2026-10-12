@@ -1,0 +1,87 @@
+{
+  "width": 160,
+  "height": 192,
+  "columns": 6,
+  "rows": 7,
+  "anchor_x": 80,
+  "anchor_y": 154,
+  "scale": 0.7,
+  "heroes": [
+    "jack",
+    "match",
+    "penny",
+    "dealer",
+    "gale",
+    "zephyr",
+    "flint",
+    "mason",
+    "clover",
+    "briar",
+    "frost",
+    "whiteout",
+    "volt",
+    "count",
+    "crown",
+    "oracle",
+    "null",
+    "laugh"
+  ],
+  "direction_angles": [
+    0,
+    45,
+    90,
+    135,
+    180,
+    225,
+    270,
+    315
+  ],
+  "camera": {
+    "elevation": 30,
+    "azimuth": 45
+  },
+  "animations": {
+    "idle": {
+      "offset": 0,
+      "frames": 6,
+      "fps": 10,
+      "loop": true
+    },
+    "walk": {
+      "offset": 6,
+      "frames": 6,
+      "fps": 12,
+      "loop": true
+    },
+    "attack": {
+      "offset": 12,
+      "frames": 6,
+      "fps": 18,
+      "loop": false
+    },
+    "skill": {
+      "offset": 18,
+      "frames": 6,
+      "fps": 12,
+      "loop": false
+    },
+    "dodge": {
+      "offset": 24,
+      "frames": 6,
+      "fps": 24,
+      "loop": false
+    },
+    "hurt": {
+      "offset": 30,
+      "frames": 6,
+      "fps": 20,
+      "loop": false
+    },
+    "death": {
+      "offset": 36,
+      "frames": 6,
+      "fps": 8,
+      "loop": false
+    }
+  }
+}

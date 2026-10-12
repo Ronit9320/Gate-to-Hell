@@ -1,0 +1,46 @@
+House of Cinders — v0.9.0
+Game code, procedural fallbacks, element icons, cards, synthesized music and
+sound effects are created in this project's source. No external samples are used.
+UI frames, card-table backgrounds, nine element medallions, all 23 item icons,
+element-themed stone arena floors and decorative animation atlases are original
+geometry modeled and rendered in Blender for this project. Reproducible source:
+scripts/blender/build_house_ui.py; editable source: art-src/blender/house-ui.blend.
+All 18 isometric heroes are original articulated Blender geometry inspired by
+the existing source portraits: palettes, costumes and character props were
+reinterpreted as 3D models, with new seven-state/eight-direction animations.
+Model/render source: scripts/blender/build_heroes.py; editable library:
+art-src/blender/heroes-isometric.blend. The source portraits are preserved as
+packed Blender references and remain excluded from the default runtime.
+The default release includes the author-approved Blender-rendered Ash Bailiff
+animation atlases, refined from the provided skeletal model and 2D reference.
+Original reference portrait was DreamLayer-generated; its file is excluded.
+Other portrait PNGs remain excluded. Optional source portraits (18 heroes
+and Ash Bailiff) were generated/processed with DreamLayer on 2026-10-12; see
+HANDOFF.md. These are excluded pending the author's replacement artwork.
+The default font and runtime are supplied by LÖVE (see LOVE-LICENSE.txt).
+The browser runtime is love.js 11.4.1, copyright Tanner Rogalsky, MIT license.
+The browser package includes LOVEJS-LICENSE.txt from its pinned npm distribution.
+LÖVE: https://love2d.org/
+love.js: https://github.com/Davidobot/love.js
+
+UI resource/action symbols and all nine element particle animations:
+Original beveled geometry, curves and keyed particle animation created in Blender
+for this project. Reproducible generator: scripts/blender/build_polish.py.
+Editable source: art-src/blender/element-effects.blend (development art only).
+
+Remaining bosses, all Hell appearances, Empty Throne phase costumes:
+Original Blender meshes, articulated pivots, materials and keyed animation,
+created for this project on 2026-10-12. Infernal Bailiff reuses the preserved
+Bailiff pose rig, with new armor treatment and modeled horns. Sources:
+scripts/blender/build_missing_bosses.py; art-src/blender/bosses-complete.blend.
+Dedicated combat library: 91 original Blender effect sheets, including hero
+skills, reactions, statuses and hazards. Source: scripts/blender/build_combat_art.py;
+art-src/blender/combat-effects.blend. Ten scenery props and four screen
+illustrations: scripts/blender/build_finishing_art.py;
+art-src/blender/scenery-and-illustrations.blend. No external model library,
+paid generation service, DreamLayer API or raster image-generation tool was used
+for these new assets. Runtime packages include rendered PNGs and metadata only.
+
+New optional release cover: original boss geometry and Blender text, rendered
+by scripts/blender/build_release_cover.py; editable source:
+art-src/blender/release-cover.blend; runtime-free media: release/cover-blender.png.
