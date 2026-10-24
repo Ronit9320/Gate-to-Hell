@@ -155,6 +155,13 @@ local function polygon(coords)
   love.graphics.polygon('fill', unpack(out))
 end
 function C.hazardId(a, h)
+  if a.encounter.id == 'bailiff' and not a.hell then
+    if h.kind == 'lane' then
+      return 'bailiff_flame'
+    elseif h.kind == 'slam' then
+      return 'bailiff_slam'
+    end
+  end
   local element = h.element or a.encounter.element
   if a.encounter.id == 'sun' and (h.kind == 'sweep' or h.kind == 'pressure') then
     element = 'Anemo'

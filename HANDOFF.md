@@ -1,6 +1,126 @@
 # Project handoff
 
-Last updated: 2026-10-12
+Last updated: 2026-10-13
+
+## Menace, detail and hammer grip revision — 2026-10-13
+
+The author requested a more menacing character, more detail and a fixed weapon
+hold. New source: `art-src/blender/bailiff-menacing.blend`; reproducible generator:
+`scripts/blender/menace_bailiff.py`, starting from `bailiff-isometric.blend` and
+reusing the sculpted builder's base forms. Earlier revisions are preserved.
+
+Blackened death-mask iron, slanted ember eyes, blade brows, jaw fangs, crown
+blades and rear shoulder talons sharpen the silhouette. Added modeled shoulder
+and chest crests, bolts, perimeter rivets, bracer bands/hinges/runes, sword
+scoring, ragged singed hems, stitches, hem weights, hanging chains and debt token.
+The larger fluted maul has reinforced collars, bolts, molten striking disk,
+iron grille and curved hook.
+
+Fixed the disconnected-looking hand construction: four curled fingers and an
+opposed thumb close around the cylindrical shaft. All gripping hand and weapon
+geometry is bound to `hand.R`. Replaced inherited attack poses with one-handed
+wind-up/release and explicit wrist orientation, so the head remains properly
+oriented as the arm lifts; the resting arm holds it farther from the chest.
+Idle is more hunched, with a lowered gaze. Hurt/walk/death clips keep the grip.
+
+Review: `art-src/previews/bailiff-menacing.png` and grip macro
+`bailiff-menacing-grip.png`; Blender is open on the new source. Frame strip of
+attack poses inspected before full export. The existing 8-direction / 320-frame
+export, anchor and runtime presentation contracts remain. Gameplay rules and
+Infernal costume are unchanged.
+
+Final verification: eight atlases / 320 animated RGBA frames pass dimensions,
+variation, alpha and clipping checks with a minimum 18px margin. Source check
+confirms all 321 visible meshes are rig-bound, and all 14 principal grip/weapon
+meshes share only `hand.R` (`.test-results/bailiff-menacing-source.json`). Grip
+macro and actual attack frame strip inspected. Formatting, native/browser
+rebuild and exact release source/archive/license/checksum verification pass.
+Chromium 153 focused Bailiff checks pass actual WebGL uploads, facing/attack/
+Hell rendering, bounded directional cache and death/rewards exactly once with
+no captured errors (`.test-results/bailiff-browser.json`). In-game placement
+and the attack screenshot were inspected. Runtime code remains unchanged by
+this visual/pose pass; gameplay scenarios were not rerun unnecessarily.
+
+Additional review images in `art-src/previews/`: `bailiff-menacing-comparison.png`,
+`bailiff-menacing-turnaround.png`, `bailiff-menacing-motion.png`. The viewer links
+the grip macro and comparison. Current packages in `dist/` are rebuilt. Next:
+author inspects the menace, details and corrected holding/swing.
+
+## Sculpted RPG Bailiff revision — 2026-10-13
+
+The author requested a less blocky, Dota 2-like RPG treatment. Rebuilt the main
+body/costume geometry, rather than adding detail to the former rectangular
+forms. New source: `art-src/blender/bailiff-sculpted.blend`; reproducible builder:
+`scripts/blender/sculpt_bailiff.py`, starting from preserved
+`bailiff-isometric.blend`. Earlier executioner source stays available.
+
+Continuous subdivided meshes define a curved cuirass, overlapping vaulted
+shoulders, tapered vambraces/greaves, anatomical boots, hands/fingers, carved
+death mask, rounded hollow hood and fluted execution maul. Cloth uses broad
+modeled folds, a split tabard, an open skirt and graded chest/pelvis weights on
+the back mantle. Weathered iron/brass/cloth/ivory materials and AgX tone mapping
+replace the flat construction appearance. ART_DIRECTION.md now records the
+author's revised target and links Valve's official character art principles.
+All geometry is original; no Dota assets imported.
+
+Close-up: `art-src/previews/bailiff-sculpted.png`. The offline Bailiff viewer and
+normal/demo fights use the updated directional sprites; attack effects and
+gameplay rules remain as delivered in the prior pass. Infernal Bailiff and other
+characters remain outside this review scope.
+
+Final checks: all eight directional atlases / 320 frames pass alpha, animation
+variation and clipping validation with a minimum 12px margin. Source inspection
+confirms 183 visible meshes, 39 subdivided surfaces and no unbound mesh; report:
+`.test-results/bailiff-sculpted-source.json`. Formatting, native/browser rebuild
+and exact release source/archive/license/checksum checks pass. Chromium 153
+focused Bailiff checks pass actual WebGL uploads, facing/attack/Hell rendering,
+the two-sheet cache limit and death/victory awarding exactly one reward, with
+no captured errors (`.test-results/bailiff-browser.json`). Gameplay code was
+unchanged by this visual revision; the prior 58-scenario result remains from
+the first pass. Current packages are rebuilt in `dist/`.
+
+Review images include `bailiff-sculpted-comparison.png` (earlier/current model),
+`bailiff-sculpted-turnaround.png` and `bailiff-sculpted-motion.png` under
+`art-src/previews/`. Final game screenshots were inspected for alignment and
+readability. Next step: author judges this visual revision.
+
+## Ash Bailiff art review — 2026-10-13
+
+The author requested a detailed, more menacing first boss before reviewing any
+hero or other boss changes. Read the project Markdown documents and wrote
+`ART_DIRECTION.md`. Normal/demo Bailiff now has a versioned Blender detail pass:
+grated chest furnace, chipped/riveted armor, articulated knuckles, iron teeth,
+folded singed mantle, chain links and a reinforced molten execution hammer.
+Earlier `bailiff-isometric.blend` and `bailiff-original.blend` remain preserved.
+
+Editable sources: `art-src/blender/bailiff-executioner.blend` and
+`art-src/blender/bailiff-effects.blend`. Rebuild scripts:
+`scripts/blender/upgrade_bailiff.py`, existing `render_bailiff.py`, and
+`scripts/blender/build_bailiff_fx.py`. The runtime keeps 256px cells, eight
+directions, 320 animation frames, ground anchor (128,204) and the existing cache.
+New flame-beam/ribbon and stamped molten-slam sheets are normal/demo Bailiff
+overrides in `src/render/combat_art.lua`. Existing stencils, warnings, collision,
+damage, safe routes and RNG remain authoritative. Infernal Bailiff retains its
+existing separate costume and effects pending first-boss approval.
+
+Review: `assets/bosses/bailiff_iso/preview.html` shows current animations plus
+the two attack effects. `art-src/previews/bailiff-executioner.png` is the close-up;
+`bailiff-executioner-turnaround.png` and `bailiff-executioner-motion.png` show
+directions and selected poses. `love .` runs the updated source game.
+
+Verification: all 58 Lua scenarios pass; eight directional atlases / 320 frames
+pass alpha, variation and clipping checks with a minimum 10px margin; all 93
+effect sheets pass their image checks. Formatting, build and exact release
+source/archive/license/checksum verification pass. Chromium 153 focused Bailiff
+checks pass actual WebGL uploads, facing/attack/Hell rendering, the two-sheet
+cache limit and death/victory awarding exactly one reward. Report:
+`.test-results/bailiff-browser.json`. Current downloads are rebuilt in `dist/`.
+
+The initial sprite check found a cape
+clipping in side-view death frames; the mantle attachment was corrected from
+chest to pelvis before final export. The effect count is now 93; updated metadata
+and cache checks include both new sheets. Art acceptance remains the author's
+next step; characters and other bosses have not been advanced.
 
 ## Submission polish — 2026-10-12
 

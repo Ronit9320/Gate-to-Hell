@@ -33,9 +33,9 @@ for name in names:
  assert len(signatures)==8,(name,'directions repeat')
  assert (folder/name/'portrait.png').is_file(),name
 print('PASS',len(names),'boss appearances /',frames,'anchored animated RGBA frames with clear borders',flush=True)
-folder=R/'assets/effects/combat';meta=json.loads((folder/'combat.json').read_text());assert len(meta['effects'])==91
+folder=R/'assets/effects/combat';meta=json.loads((folder/'combat.json').read_text());assert len(meta['effects'])==93
 for id in meta['effects']:validate(folder/(id+'.png'),128,128,4,2,{'effect':{'offset':0,'frames':8}})
-print('PASS 91 dedicated effects / 728 RGBA frames, animation and transparent borders',flush=True)
+print('PASS 93 dedicated effects / 744 RGBA frames, animation and transparent borders',flush=True)
 for id in ['bailiff','undertow','kite','bedrock','bramble','regent','static','sun','kings','throne']:
  assert (R/'assets/scenery'/('prop_'+id+'.png')).is_file()
 for id in ['reward','victory','defeat','hell_entry']:assert (R/'assets/scenery'/(id+'.png')).is_file()

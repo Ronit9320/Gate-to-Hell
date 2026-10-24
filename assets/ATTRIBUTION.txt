@@ -51,3 +51,22 @@ They animate at runtime for hits, critical hits, melee slashes and shockwaves.
 Fonts: Cinzel by Natanael Gama and Adwaita Sans by its respective authors;
 both distributed under SIL OFL 1.1. Full notices in assets/fonts/*LICENSE.txt
 and assets/fonts/Cinzel-OFL.txt. Font files are bundled, with no network dependency.
+
+Ash Bailiff detail pass (13 October 2026): original modeled furnace grille,
+armor fastenings/wear, articulated knuckles, iron mask teeth, folded mantle,
+chain and execution hammer. Source: art-src/blender/bailiff-executioner.blend;
+generator: scripts/blender/upgrade_bailiff.py. Two original boss-local fire-lane
+and molten-slam sheets: art-src/blender/bailiff-effects.blend and
+scripts/blender/build_bailiff_fx.py. Earlier source models are preserved.
+
+Sculpted RPG Bailiff revision (13 October 2026): continuous curved original
+character/costume geometry, modeled cloth folds, blended cape skinning and
+weathered materials. Generator: scripts/blender/sculpt_bailiff.py; editable
+source: art-src/blender/bailiff-sculpted.blend. Art principles reference:
+Valve's Dota 2 Workshop Character Art Guide; no Valve model/textures used.
+
+Menacing Bailiff and corrected grip revision (13 October 2026): original closed
+gripping hand, detailed forged maul, blackened mask, crown/shoulder blades,
+modeled armor/cloth hardware and new wrist-controlled animation clips.
+Generator: scripts/blender/menace_bailiff.py; source:
+art-src/blender/bailiff-menacing.blend. Earlier sources remain preserved.

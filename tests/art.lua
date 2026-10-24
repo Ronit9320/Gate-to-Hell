@@ -131,6 +131,16 @@ return function(test)
     local C = require('src.render.combat_art')
     assert(C.frame(-1, false) == 0 and C.frame(10, false) == 7 and C.frame(0.9, true) == 3)
     assert(not C.draw('missing', 0, 0, 80, 0, false))
+    assert(
+      C.hazardId({ encounter = { id = 'bailiff', element = 'Pyro' } }, { kind = 'lane' }) == 'bailiff_flame'
+    )
+    assert(
+      C.hazardId({ encounter = { id = 'bailiff', element = 'Pyro' } }, { kind = 'slam' }) == 'bailiff_slam'
+    )
+    assert(
+      C.hazardId({ hell = true, encounter = { id = 'bailiff', element = 'Pyro' } }, { kind = 'lane' })
+        == 'hazard_flame'
+    )
     local count = 0
     for id in pairs(require('src.data.combat_art')) do
       assert(C.draw(id, 0, 0, 80, 0.5, false))
@@ -141,7 +151,7 @@ return function(test)
       end
       assert(n <= 16)
     end
-    assert(count == 91 and releases == count - 16)
+    assert(count == 93 and releases == count - 16)
     love = old
     package.loaded['src.render.combat_art'] = nil
   end)
